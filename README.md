@@ -4,21 +4,32 @@
 
 [![License](https://img.shields.io/npm/l/@ston-fi/api)](https://img.shields.io/npm/l/@ston-fi/api)
 [![npm version](https://img.shields.io/npm/v/@ston-fi/api/latest.svg)](https://www.npmjs.com/package/@ston-fi/api/v/latest)
-![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/%40ston-fi/api)
 
-JavaScript wrapper on top of the [Ston.fi Http API](https://api.ston.fi/swagger-ui)
+TypeScript wrapper on top of the [Ston.fi Http API](https://api.ston.fi/swagger-ui)
 
 ## Installation
 
-```shell
-npm install @ston-fi/api
+### NPM
 
+```bash
+npm install @ston-fi/api
+```
+
+### Yarn
+
+```bash
 yarn add @ston-fi/api
+```
+
+### PNPM
+
+```bash
+pnpm install @ston-fi/api
 ```
 
 ## Configuration
 
-Zero config required, you can just create an instance.
+Zero config required, you can just create an instance
 
 Optional configuration are also possible by providing an object of type `StonApiClientOptions` to the constructor
 
@@ -41,13 +52,12 @@ const walletAssets = await client.getWalletAssets('EQ...')
 ## Roadmap
 
 - add missed methods. You can find the list of currently available methods [here](https://github.com/ston-fi/api/blob/main/src/client/apiClient.ts).
-  - `/dex`
-    - `/reverse_swap/simulate`
-    - `/swap/simulate`
-    - `/swap/status`
-  - `/stats`
   - `/wallets`
     - `/{addr_str}/operations`
+  - `/stats`
+    - `/dex`
+    - `/operations`
+    - `/pool`
   - `/export`
 - and js-dock for each method
 - add more options in configuration

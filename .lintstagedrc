@@ -1,3 +1,0 @@
-{
-  "*": ["biome format --write", "biome check"]
-}

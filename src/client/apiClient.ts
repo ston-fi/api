@@ -5,8 +5,11 @@ import { normalizeResponse } from "./mappers/normalizeResponse";
 import type { AssetInfoResponse } from "./types/asset";
 import type { FarmInfoResponse } from "./types/farm";
 import type { PoolInfoResponse } from "./types/pool";
+import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
 
 export type StonApiClientOptions = {
+  baseURL?: string;
+  /** @deprecated use `baseURL` instead to better match `FetchOptions` */
   baseUrl?: string;
 };
 
@@ -18,7 +21,9 @@ export class StonApiClient {
     // from "options.baseUrl" to all requests because "ofetch" doesn't do it automatically
     // "ofetch('/baz', { baseURL: 'http://site.com?foo=bar' })" > "http://site.com?foo=bar/baz"
 
-    const baseUrl = new URL(options?.baseUrl ?? "https://api.ston.fi");
+    const baseUrl = new URL(
+      options?.baseURL ?? options?.baseUrl ?? "https://api.ston.fi",
+    );
     const baseQuery = [...new URLSearchParams(baseUrl.search)].reduce(
       // biome-ignore lint/performance/noAccumulatingSpread: it's ok here
       (acc, [key, value]) => ({ ...acc, [key]: value }),
@@ -51,6 +56,31 @@ export class StonApiClient {
     ).farmList;
   }
 
+  public async getSwapPairs() {
+    return normalizeResponse(
+      await this.apiFetch<{ pairs: [string, string][] }>(
+        ...normalizeRequest("/v1/markets", {
+          method: "GET",
+        }),
+      ),
+    ).pairs;
+  }
+
+  public async getSwapStatus(query: {
+    routerAddress: string;
+    ownerAddress: string;
+    queryId: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<SwapStatusResponse>(
+        ...normalizeRequest("/v1/swap/status", {
+          method: "GET",
+          query,
+        }),
+      ),
+    );
+  }
+
   public async getPools() {
     return normalizeResponse(
       await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
@@ -59,6 +89,46 @@ export class StonApiClient {
         }),
       ),
     ).poolList;
+  }
+
+  public async simulateSwap(query: {
+    askAddress: string;
+    offerAddress: string;
+    offerUnits: string;
+    slippageTolerance: string;
+    referralAddress?: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<SwapSimulationResponse>(
+        ...normalizeRequest("/v1/swap/simulate", {
+          method: "POST",
+          query: {
+            ...query,
+            units: query.offerUnits,
+          },
+        }),
+      ),
+    );
+  }
+
+  public async simulateReverseSwap(query: {
+    askAddress: string;
+    askUnits: string;
+    offerAddress: string;
+    slippageTolerance: string;
+    referralAddress?: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<SwapSimulationResponse>(
+        ...normalizeRequest("/v1/reverse_swap/simulate", {
+          method: "POST",
+          query: {
+            ...query,
+            units: query.askUnits,
+          },
+        }),
+      ),
+    );
   }
 
   public async getJettonWalletAddress(query: {
