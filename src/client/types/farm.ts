@@ -3,6 +3,10 @@ export type FarmNftInfoResponse = {
   create_timestamp: string;
   min_unstake_timestamp: string;
   nonclaimed_rewards: string;
+  rewards: Array<{
+    address: string;
+    amount: string;
+  }>;
   staked_tokens: string;
   status: string;
 };

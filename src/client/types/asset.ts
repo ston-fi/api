@@ -18,6 +18,7 @@ export type AssetInfoResponse = {
   display_name?: string | null;
   image_url?: string | null;
   kind: AssetKind;
+  priority: number;
   symbol: string;
   third_party_price_usd?: string | null;
   wallet_address?: string | null;

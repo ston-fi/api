@@ -36,6 +36,17 @@ export class StonApiClient {
     });
   }
 
+  public async getAsset(assetAddress: string) {
+    return normalizeResponse(
+      await this.apiFetch<{ asset: AssetInfoResponse }>(
+        ...normalizeRequest("/v1/assets/{assetAddress}", {
+          method: "GET",
+          query: { assetAddress },
+        }),
+      ),
+    ).asset;
+  }
+
   public async getAssets() {
     return normalizeResponse(
       await this.apiFetch<{ asset_list: AssetInfoResponse[] }>(
@@ -46,11 +57,33 @@ export class StonApiClient {
     ).assetList;
   }
 
+  public async getFarm(farmAddress: string) {
+    return normalizeResponse(
+      await this.apiFetch<{ farm: FarmInfoResponse }>(
+        ...normalizeRequest("/v1/farms/{farmAddress}", {
+          method: "GET",
+          query: { farmAddress },
+        }),
+      ),
+    ).farm;
+  }
+
   public async getFarms() {
     return normalizeResponse(
       await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
         ...normalizeRequest("/v1/farms", {
           method: "GET",
+        }),
+      ),
+    ).farmList;
+  }
+
+  public async getFarmsByPool(poolAddress: string) {
+    return normalizeResponse(
+      await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
+        ...normalizeRequest("/v1/farms_by_pool/{poolAddress}", {
+          method: "GET",
+          query: { poolAddress },
         }),
       ),
     ).farmList;
@@ -79,6 +112,17 @@ export class StonApiClient {
         }),
       ),
     );
+  }
+
+  public async getPool(poolAddress: string) {
+    return normalizeResponse(
+      await this.apiFetch<{ pool: PoolInfoResponse }>(
+        ...normalizeRequest("/v1/pools/{poolAddress}", {
+          method: "GET",
+          query: { poolAddress },
+        }),
+      ),
+    ).pool;
   }
 
   public async getPools() {
@@ -145,6 +189,23 @@ export class StonApiClient {
     ).address;
   }
 
+  public async getWalletAsset(query: {
+    walletAddress: string;
+    assetAddress: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ asset: AssetInfoResponse }>(
+        ...normalizeRequest(
+          "/v1/wallets/{walletAddress}/assets/{assetAddress}",
+          {
+            method: "GET",
+            query,
+          },
+        ),
+      ),
+    ).asset;
+  }
+
   public async getWalletAssets(walletAddress: string) {
     return normalizeResponse(
       await this.apiFetch<{ asset_list: AssetInfoResponse[] }>(
@@ -156,15 +217,43 @@ export class StonApiClient {
     ).assetList;
   }
 
+  public async getWalletFarm(query: {
+    walletAddress: string;
+    farmAddress: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ farm: FarmInfoResponse }>(
+        ...normalizeRequest("/v1/wallets/{walletAddress}/farms/{farmAddress}", {
+          method: "GET",
+          query,
+        }),
+      ),
+    ).farm;
+  }
+
   public async getWalletFarms(walletAddress: string) {
     return normalizeResponse(
       await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
-        ...normalizeRequest("/v1/wallets/{walletAddress}/farm", {
+        ...normalizeRequest("/v1/wallets/{walletAddress}/farms", {
           method: "GET",
           query: { walletAddress },
         }),
       ),
     ).farmList;
+  }
+
+  public async getWalletPool(query: {
+    walletAddress: string;
+    poolAddress: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ pool: PoolInfoResponse }>(
+        ...normalizeRequest("/v1/wallets/{walletAddress}/pools/{poolAddress}", {
+          method: "GET",
+          query,
+        }),
+      ),
+    ).pool;
   }
 
   public async getWalletPools(walletAddress: string) {

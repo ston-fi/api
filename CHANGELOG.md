@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.9.0]
+
+### Added
+
+- `StonApiClient.getAsset` method
+- `StonApiClient.getWalletAsset` method
+- `StonApiClient.getPool` method
+- `StonApiClient.getWalletPool` method
+- `StonApiClient.getFarm` method
+- `StonApiClient.getWalletFarm` method
+- `StonApiClient.getFarmsByPool` method
+- `AssetInfo.priority` field
+- `SwapSimulation.askJettonWallet`, `SwapSimulation.offerJettonWallet` field
+- `FarmNftInfo.rewards` field
+
+### Fixed
+
+- fix `getWalletFarms` method URL
+
 ## [0.8.0]
 
 ### Added
