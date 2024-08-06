@@ -4,7 +4,17 @@ export const AssetKind = {
   Jetton: "Jetton",
 } as const;
 
+export const AssetTag = [
+  "default_symbol",
+  "no_liquidity",
+  "low_liquidity",
+  "high_liquidity",
+  "taxable",
+  "deprecated",
+] as const;
+
 export type AssetKind = keyof typeof AssetKind;
+export type AssetTag = typeof AssetTag;
 
 export type AssetInfoResponse = {
   balance?: string | null;
@@ -22,4 +32,5 @@ export type AssetInfoResponse = {
   symbol: string;
   third_party_price_usd?: string | null;
   wallet_address?: string | null;
+  tags: AssetTag[];
 };

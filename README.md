@@ -56,6 +56,16 @@ const walletAssets = await client.getWalletAssets('UQ...');
 // get asset info by it address with balance for a given wallet
 const walletAsset = await client.getWalletAsset({ assetAddress: 'EQ...', walletAddress: 'UQ...' });
 
+// * operations
+
+// get list of operations during specified period of time for a given wallet
+const operations = await client.getWalletOperations({
+  since: '2024-06-01T12:00:00', // YYYY-MM-DDTHH:MM:SS
+  until: '2024-08-06T21:00:00',
+  walletAddress: 'UQ...',
+  opType: 'SendLiquidity' // optional; see type definition
+})
+
 // * pools
 
 // get list of all DEX pools
@@ -105,8 +115,6 @@ const swapStatus = await client.getSwapStatus({ /** */ });
 ## Roadmap
 
 - add missed methods. You can find the list of currently available methods [here](https://github.com/ston-fi/api/blob/main/src/client/apiClient.ts).
-  - `/wallets`
-    - `/{addr_str}/operations`
 - and js-dock for each method
 - add more options in configuration
   - ? interceptors via [ofetch](https://github.com/unjs/ofetch?tab=readme-ov-file#%EF%B8%8F-interceptors)

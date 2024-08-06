@@ -1,9 +1,13 @@
-import { ofetch } from "ofetch";
+import { type $Fetch, ofetch } from "ofetch";
 
 import { normalizeRequest } from "./mappers/normalizeRequest";
 import { normalizeResponse } from "./mappers/normalizeResponse";
 import type { AssetInfoResponse } from "./types/asset";
 import type { FarmInfoResponse } from "./types/farm";
+import type {
+  OperationInfoResponse,
+  OperationTypeParam,
+} from "./types/operation";
 import type { PoolInfoResponse } from "./types/pool";
 import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
 
@@ -14,7 +18,7 @@ export type StonApiClientOptions = {
 };
 
 export class StonApiClient {
-  private readonly apiFetch;
+  private readonly apiFetch: $Fetch;
 
   constructor(options?: StonApiClientOptions) {
     // Following code is needed to carry over the query params
@@ -215,6 +219,22 @@ export class StonApiClient {
         }),
       ),
     ).assetList;
+  }
+
+  public async getWalletOperations(query: {
+    since: string;
+    until: string;
+    walletAddress: string;
+    opType?: OperationTypeParam;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ operations: OperationInfoResponse[] }>(
+        ...normalizeRequest("/v1/wallets/{walletAddress}/operations", {
+          method: "GET",
+          query,
+        }),
+      ),
+    ).operations;
   }
 
   public async getWalletFarm(query: {
