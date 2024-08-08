@@ -66,6 +66,12 @@ const operations = await client.getWalletOperations({
   opType: 'SendLiquidity' // optional; see type definition
 })
 
+// get list of ALL operations during specified period of time on the platform
+const operations = await client.getAllOperations({
+  since: '2024-08-05T12:00:00', // YYYY-MM-DDTHH:MM:SS
+  until: '2024-08-06T21:00:00'
+})
+
 // * pools
 
 // get list of all DEX pools

@@ -221,22 +221,6 @@ export class StonApiClient {
     ).assetList;
   }
 
-  public async getWalletOperations(query: {
-    since: string;
-    until: string;
-    walletAddress: string;
-    opType?: OperationTypeParam;
-  }) {
-    return normalizeResponse(
-      await this.apiFetch<{ operations: OperationInfoResponse[] }>(
-        ...normalizeRequest("/v1/wallets/{walletAddress}/operations", {
-          method: "GET",
-          query,
-        }),
-      ),
-    ).operations;
-  }
-
   public async getWalletFarm(query: {
     walletAddress: string;
     farmAddress: string;
@@ -285,5 +269,35 @@ export class StonApiClient {
         }),
       ),
     ).poolList;
+  }
+
+  public async getWalletOperations(query: {
+    since: string;
+    until: string;
+    walletAddress: string;
+    opType?: OperationTypeParam;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ operations: OperationInfoResponse[] }>(
+        ...normalizeRequest("/v1/wallets/{walletAddress}/operations", {
+          method: "GET",
+          query,
+        }),
+      ),
+    ).operations;
+  }
+
+  public async getAllOperations(query: {
+    since: string;
+    until: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ operations: OperationInfoResponse[] }>(
+        ...normalizeRequest("/v1/stats/operations", {
+          method: "GET",
+          query,
+        }),
+      ),
+    ).operations;
   }
 }
