@@ -50,6 +50,19 @@ const assets = await client.getAssets();
 // get asset info by it address
 const asset = await client.getAsset('EQ...');
 
+// get list of all DEX assets based on query condition
+const assets = await client.queryAssets({
+  condition: `${AssetTag.DefaultSymbol} | ${AssetTag.WalletHasBalance}`,
+  walletAddress: 'UQ...',
+});
+
+// search assets across of all DEX assets based on search string and query condition
+const matchedAssets = await client.searchAssets({
+  searchString: "TON",
+  condition: `(!${AssetTag.Blacklisted} & ${AssetTag.LowLiquidity}) | ${AssetTag.DefaultSymbol}`,
+  walletAddress: "UQ...",
+});
+
 // get list of all DEX assets with balances for a given wallet
 const walletAssets = await client.getWalletAssets('UQ...');
 
@@ -100,13 +113,32 @@ const swapReverseSimulation = await client.simulateReverseSwap({ /** */ });
 
 // get swap status by it id and some additional info (e.g. wallet address, etc.)
 const swapStatus = await client.getSwapStatus({ /** */ });
+
+// * operations
+
+// get list of ALL operations during specified period of time on the platform
+const operations = await client.getOperationsStats({
+  since: new Date('2024-08-05T12:00:00'),
+  until: new Date('2024-08-06T21:00:00')
+});
+
+// get list of operations during specified period of time for a given wallet
+const operations = await client.getWalletOperations({
+  since: new Date('2024-06-01T12:00:00'),
+  until: new Date('2024-08-06T21:00:00'),
+  walletAddress: 'UQ...',
+  opType: 'SendLiquidity' // optional; see type definition
+});
+
 ```
 
 ## Roadmap
 
 - add missed methods. You can find the list of currently available methods [here](https://github.com/ston-fi/api/blob/main/src/client/apiClient.ts).
-  - `/wallets`
-    - `/{addr_str}/operations`
+  - `/stats`
+    - `/dex`
+    - `/pool`
+  - `/export`
 - and js-dock for each method
 - add more options in configuration
   - ? interceptors via [ofetch](https://github.com/unjs/ofetch?tab=readme-ov-file#%EF%B8%8F-interceptors)

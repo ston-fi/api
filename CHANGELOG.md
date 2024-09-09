@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.10.0]
+
+### Added
+
+- `AssetInfo` structure was extended with a `tags` field
+- `StonApiClient.queryAssets` method
+- `StonApiClient.searchAssets` method
+- `StonApiClient.getWalletOperations` method
+- `StonApiClient.getOperationsStats` method
+
 ## [0.9.0]
 
 ### Added

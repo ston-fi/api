@@ -1,9 +1,13 @@
 import { ofetch } from "ofetch";
 
+import { normalizeDate } from "../utils/normalizeDate";
+
 import { normalizeRequest } from "./mappers/normalizeRequest";
 import { normalizeResponse } from "./mappers/normalizeResponse";
-import type { AssetInfoResponse } from "./types/asset";
+
+import type { AssetInfoResponse, AssetInfoV2Response } from "./types/asset";
 import type { FarmInfoResponse } from "./types/farm";
+import type { OperationInfoResponse, OperationType } from "./types/operation";
 import type { PoolInfoResponse } from "./types/pool";
 import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
 
@@ -52,6 +56,35 @@ export class StonApiClient {
       await this.apiFetch<{ asset_list: AssetInfoResponse[] }>(
         ...normalizeRequest("/v1/assets", {
           method: "GET",
+        }),
+      ),
+    ).assetList;
+  }
+
+  public async queryAssets(query: {
+    condition: string;
+    walletAddress?: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ asset_list: AssetInfoV2Response[] }>(
+        ...normalizeRequest("/v1/assets/query", {
+          method: "POST",
+          query,
+        }),
+      ),
+    ).assetList;
+  }
+
+  public async searchAssets(query: {
+    searchString: string;
+    condition: string;
+    walletAddress?: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ asset_list: AssetInfoV2Response[] }>(
+        ...normalizeRequest("/v1/assets/search", {
+          method: "POST",
+          query,
         }),
       ),
     ).assetList;
@@ -265,5 +298,46 @@ export class StonApiClient {
         }),
       ),
     ).poolList;
+  }
+
+  public async getWalletOperations({
+    since,
+    until,
+    ...query
+  }: {
+    since: Date;
+    until: Date;
+    walletAddress: string;
+    opType?: keyof typeof OperationType;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ operations: OperationInfoResponse[] }>(
+        ...normalizeRequest("/v1/wallets/{walletAddress}/operations", {
+          method: "GET",
+          query: {
+            ...query,
+            since: normalizeDate(since),
+            until: normalizeDate(until),
+          },
+        }),
+      ),
+    ).operations;
+  }
+
+  public async getOperationsStats({
+    since,
+    until,
+  }: { since: Date; until: Date }) {
+    return normalizeResponse(
+      await this.apiFetch<{ operations: OperationInfoResponse[] }>(
+        ...normalizeRequest("/v1/stats/operations", {
+          method: "GET",
+          query: {
+            since: normalizeDate(since),
+            until: normalizeDate(until),
+          },
+        }),
+      ),
+    ).operations;
   }
 }
