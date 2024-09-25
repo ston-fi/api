@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.12.1]
+
+### Fixed
+
+- fix `getRouters` response type declaration
+
 ## [0.12.0]
 
 ### Added

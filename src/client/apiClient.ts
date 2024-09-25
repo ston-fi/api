@@ -371,7 +371,7 @@ export class StonApiClient {
 
   public async getRouter(routerAddress: string) {
     return normalizeResponse(
-      await this.apiFetch<RouterInfoResponse>(
+      await this.apiFetch<{ router: RouterInfoResponse }>(
         ...normalizeRequest("/v1/routers/{routerAddress}", {
           method: "GET",
           query: {
