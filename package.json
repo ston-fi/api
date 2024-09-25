@@ -1,6 +1,6 @@
 {
   "name": "@ston-fi/api",
-  "version": "0.10.0",
+  "version": "0.12.0",
   "description": "JavaScript client for Ston.fi Http API",
   "license": "MIT",
   "homepage": "https://github.com/ston-fi/api#readme",
@@ -9,6 +9,7 @@
     "url": "git+https://github.com/ston-fi/api.git"
   },
   "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -46,13 +47,13 @@
     "ofetch": "1.3.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
-    "@vitest/coverage-v8": "^1.6.0",
-    "lefthook": "^1.7.15",
-    "rollup-plugin-visualizer": "^5.12.0",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.3",
-    "vite-plugin-dts": "^3.9.1",
-    "vitest": "^1.6.0"
+    "@biomejs/biome": "1.8.3",
+    "@vitest/coverage-v8": "1.6.0",
+    "lefthook": "1.7.15",
+    "rollup-plugin-visualizer": "5.12.0",
+    "typescript": "5.5.4",
+    "vite": "5.4.3",
+    "vite-plugin-dts": "3.9.1",
+    "vitest": "1.6.0"
   }
 }

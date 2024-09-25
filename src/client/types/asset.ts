@@ -37,6 +37,8 @@ export type AssetInfoResponse = {
   third_party_price_usd?: string | null;
   wallet_address?: string | null;
   tags: AssetTag[];
+  custom_payload_api_uri?: string;
+  extensions?: string[];
 };
 
 type AssetV2Meta = {
@@ -44,6 +46,7 @@ type AssetV2Meta = {
   symbol?: string;
   display_name?: string;
   image_url?: string;
+  custom_payload_api_uri?: string;
 };
 
 export type AssetInfoV2Response = {
@@ -55,4 +58,5 @@ export type AssetInfoV2Response = {
   pair_priority?: number;
   tags?: AssetTag[];
   wallet_address?: string;
+  extensions?: string[];
 };

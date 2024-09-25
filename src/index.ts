@@ -17,5 +17,8 @@ export type SwapPair = Awaited<
   ReturnType<StonApiClient["getSwapPairs"]>
 >[number];
 export type OperationInfo = Awaited<
-  ReturnType<StonApiClient["getOperationsStats"]>
+  ReturnType<StonApiClient["getOperations"]>
+>[number];
+export type RouterInfo = Awaited<
+  ReturnType<StonApiClient["getRouters"]>
 >[number];

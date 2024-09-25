@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.12.0]
+
+### Added
+- The `AssetInfo` structure was extended with `extensions` & `custom_payload_api_uri` fields (fields for Mintless Jetton's)
+- The `AssetInfoV2Response` structure was extended with `extensions` & `meta.custom_payload_api_uri` fields (fields for Mintless Jetton's)
+- `StonApiClient.getRouters` method
+- `StonApiClient.getRouter` method
+- Most API methods now accept the optional `dexV2` parameter. If this parameter is passed to the API method, the response will contain v1 AND v2 addresses (for example, `StonApiClient.getRouters()` will return only an array of v1 routers, and `StonApiClient.getRouters({ dexV2: true })` will return an array of v1 and v2 routers). The same logic applies to all other methods where this parameter was added. By default, this parameter is set to `false` and is needed to force users to explicitly confirm that they are ready to receive v2 addresses from the API
+  - `StonApiClient.getRouters`
+  - `StonApiClient.getSwapPairs`
+  - `StonApiClient.simulateSwap`
+  - `StonApiClient.simulateReverseSwap`
+  - `StonApiClient.getPools`
+  - `StonApiClient.getWalletPools`
+  - `StonApiClient.getFarms`
+  - `StonApiClient.getWalletFarms`
+  - `StonApiClient.getWalletOperations`
+
 ## [0.10.0]
 
 ### Added

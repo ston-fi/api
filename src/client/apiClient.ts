@@ -7,9 +7,10 @@ import { normalizeResponse } from "./mappers/normalizeResponse";
 
 import type { AssetInfoResponse, AssetInfoV2Response } from "./types/asset";
 import type { FarmInfoResponse } from "./types/farm";
-import type { OperationInfoResponse, OperationType } from "./types/operation";
 import type { PoolInfoResponse } from "./types/pool";
 import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
+import type { OperationInfoResponse, OperationType } from "./types/operation";
+import type { RouterInfoResponse } from "./types/router";
 
 export type StonApiClientOptions = {
   baseURL?: string;
@@ -61,15 +62,22 @@ export class StonApiClient {
     ).assetList;
   }
 
-  public async queryAssets(query: {
+  public async queryAssets({
+    unconditionalAssets: unconditionalAsset,
+    ...query
+  }: {
     condition: string;
     walletAddress?: string;
+    unconditionalAssets?: string[];
   }) {
     return normalizeResponse(
       await this.apiFetch<{ asset_list: AssetInfoV2Response[] }>(
         ...normalizeRequest("/v1/assets/query", {
           method: "POST",
-          query,
+          query: {
+            ...query,
+            unconditionalAsset,
+          },
         }),
       ),
     ).assetList;
@@ -101,11 +109,14 @@ export class StonApiClient {
     ).farm;
   }
 
-  public async getFarms() {
+  public async getFarms(query?: {
+    dexV2?: boolean;
+  }) {
     return normalizeResponse(
       await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
         ...normalizeRequest("/v1/farms", {
           method: "GET",
+          query,
         }),
       ),
     ).farmList;
@@ -122,11 +133,12 @@ export class StonApiClient {
     ).farmList;
   }
 
-  public async getSwapPairs() {
+  public async getSwapPairs(query?: { dexV2?: boolean }) {
     return normalizeResponse(
       await this.apiFetch<{ pairs: [string, string][] }>(
         ...normalizeRequest("/v1/markets", {
           method: "GET",
+          query,
         }),
       ),
     ).pairs;
@@ -147,22 +159,23 @@ export class StonApiClient {
     );
   }
 
-  public async getPool(poolAddress: string) {
+  public async getPool(data: string | { poolAddress: string }) {
     return normalizeResponse(
       await this.apiFetch<{ pool: PoolInfoResponse }>(
         ...normalizeRequest("/v1/pools/{poolAddress}", {
           method: "GET",
-          query: { poolAddress },
+          query: typeof data === "string" ? { poolAddress: data } : data,
         }),
       ),
     ).pool;
   }
 
-  public async getPools() {
+  public async getPools(query?: { dexV2?: boolean }) {
     return normalizeResponse(
       await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
         ...normalizeRequest("/v1/pools", {
           method: "GET",
+          query,
         }),
       ),
     ).poolList;
@@ -174,6 +187,7 @@ export class StonApiClient {
     offerUnits: string;
     slippageTolerance: string;
     referralAddress?: string;
+    dexV2?: boolean;
   }) {
     return normalizeResponse(
       await this.apiFetch<SwapSimulationResponse>(
@@ -194,6 +208,7 @@ export class StonApiClient {
     offerAddress: string;
     slippageTolerance: string;
     referralAddress?: string;
+    dexV2?: boolean;
   }) {
     return normalizeResponse(
       await this.apiFetch<SwapSimulationResponse>(
@@ -264,12 +279,14 @@ export class StonApiClient {
     ).farm;
   }
 
-  public async getWalletFarms(walletAddress: string) {
+  public async getWalletFarms(
+    data: string | { walletAddress: string; dexV2?: boolean },
+  ) {
     return normalizeResponse(
       await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
         ...normalizeRequest("/v1/wallets/{walletAddress}/farms", {
           method: "GET",
-          query: { walletAddress },
+          query: typeof data === "string" ? { walletAddress: data } : data,
         }),
       ),
     ).farmList;
@@ -289,12 +306,14 @@ export class StonApiClient {
     ).pool;
   }
 
-  public async getWalletPools(walletAddress: string) {
+  public async getWalletPools(
+    data: string | { walletAddress: string; dexV2?: boolean },
+  ) {
     return normalizeResponse(
       await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
         ...normalizeRequest("/v1/wallets/{walletAddress}/pools", {
           method: "GET",
-          query: { walletAddress },
+          query: typeof data === "string" ? { walletAddress: data } : data,
         }),
       ),
     ).poolList;
@@ -308,6 +327,7 @@ export class StonApiClient {
     since: Date;
     until: Date;
     walletAddress: string;
+    dexV2?: boolean;
     opType?: keyof typeof OperationType;
   }) {
     return normalizeResponse(
@@ -324,10 +344,7 @@ export class StonApiClient {
     ).operations;
   }
 
-  public async getOperationsStats({
-    since,
-    until,
-  }: { since: Date; until: Date }) {
+  public async getOperations({ since, until }: { since: Date; until: Date }) {
     return normalizeResponse(
       await this.apiFetch<{ operations: OperationInfoResponse[] }>(
         ...normalizeRequest("/v1/stats/operations", {
@@ -339,5 +356,29 @@ export class StonApiClient {
         }),
       ),
     ).operations;
+  }
+
+  public async getRouters(query?: { dexV2?: boolean }) {
+    return normalizeResponse(
+      await this.apiFetch<{ router_list: RouterInfoResponse[] }>(
+        ...normalizeRequest("/v1/routers", {
+          method: "GET",
+          query,
+        }),
+      ),
+    ).routerList;
+  }
+
+  public async getRouter(routerAddress: string) {
+    return normalizeResponse(
+      await this.apiFetch<RouterInfoResponse>(
+        ...normalizeRequest("/v1/routers/{routerAddress}", {
+          method: "GET",
+          query: {
+            routerAddress,
+          },
+        }),
+      ),
+    ).router;
   }
 }

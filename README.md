@@ -42,6 +42,14 @@ const client = new StonApiClient();
 ## Usage
 
 ```ts
+// * routers
+
+// get list of all available routers
+const routers = await client.getRouters();
+
+// get router by address
+const router = await client.getRouter('EQ...');
+
 // * assets
 
 // get list of all DEX assets
@@ -117,7 +125,7 @@ const swapStatus = await client.getSwapStatus({ /** */ });
 // * operations
 
 // get list of ALL operations during specified period of time on the platform
-const operations = await client.getOperationsStats({
+const operations = await client.getOperations({
   since: new Date('2024-08-05T12:00:00'),
   until: new Date('2024-08-06T21:00:00')
 });
@@ -135,10 +143,6 @@ const operations = await client.getWalletOperations({
 ## Roadmap
 
 - add missed methods. You can find the list of currently available methods [here](https://github.com/ston-fi/api/blob/main/src/client/apiClient.ts).
-  - `/stats`
-    - `/dex`
-    - `/pool`
-  - `/export`
 - and js-dock for each method
 - add more options in configuration
   - ? interceptors via [ofetch](https://github.com/unjs/ofetch?tab=readme-ov-file#%EF%B8%8F-interceptors)
