@@ -148,10 +148,8 @@ const operations = await client.getWalletOperations({
 
 ## Roadmap
 
-- add missed methods. You can find the list of currently available methods [here](https://github.com/ston-fi/api/blob/main/src/client/apiClient.ts).
 - and js-dock for each method
 - add more options in configuration
   - ? interceptors via [ofetch](https://github.com/unjs/ofetch?tab=readme-ov-file#%EF%B8%8F-interceptors)
   - ? retry via [ofetch](https://github.com/unjs/ofetch?tab=readme-ov-file#%EF%B8%8F-auto-retry)
-  - ? request abort controller
-  - ? controlled case `"camel" | "snake"`
+  - ? support request abortion via AbortController
