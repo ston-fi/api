@@ -1,6 +1,6 @@
 {
   "name": "@ston-fi/api",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "description": "JavaScript client for Ston.fi Http API",
   "license": "MIT",
   "homepage": "https://github.com/ston-fi/api#readme",

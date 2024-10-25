@@ -7,15 +7,25 @@ export const AssetKind = {
 export type AssetKind = keyof typeof AssetKind;
 
 export const AssetTag = {
-  Taxable: "taxable",
-  Deprecated: "deprecated",
-  Blacklisted: "blacklisted",
-  DefaultSymbol: "default_symbol",
+  Blacklisted: "asset:blacklisted",
+  Deprecated: "asset:deprecated",
+  DefaultSymbol: "asset:default_symbol",
+  LiquidityNo: "asset:liquidity:no",
+  LiquidityMedium: "asset:liquidity:medium",
+  LiquidityLow: "asset:liquidity:low",
+  LiquidityHigh: "asset:liquidity:high",
+  LiquidityVeryHigh: "asset:liquidity:very_high",
+  Popular: "asset:popular",
+  WalletHasBalance: "asset:wallet_has_balance",
+  WalletHasLiquidityInPool: "asset:wallet_has_liquidity_in_pool",
+  Taxable: "asset:taxable",
+
+  /** @deprecated use LiquidityNo instead */
   NoLiquidity: "no_liquidity",
+  /** @deprecated use LiquidityLow instead */
   LowLiquidity: "low_liquidity",
+  /** @deprecated use LiquidityHigh instead */
   HighLiquidity: "high_liquidity",
-  WalletHasBalance: "wallet_has_balance",
-  WalletHasLiquidityInPool: "wallet_has_liquidity_in_pool",
 } as const;
 
 export type AssetTag = (typeof AssetTag)[keyof typeof AssetTag];

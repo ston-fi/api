@@ -83,16 +83,24 @@ export class StonApiClient {
     ).assetList;
   }
 
-  public async searchAssets(query: {
+  public async searchAssets({
+    unconditionalAssets: unconditionalAsset,
+    ...query
+  }: {
     searchString: string;
     condition: string;
     walletAddress?: string;
+    unconditionalAssets?: string[];
+    limit?: number;
   }) {
     return normalizeResponse(
       await this.apiFetch<{ asset_list: AssetInfoV2Response[] }>(
         ...normalizeRequest("/v1/assets/search", {
           method: "POST",
-          query,
+          query: {
+            ...query,
+            unconditionalAsset,
+          },
         }),
       ),
     ).assetList;
@@ -176,6 +184,28 @@ export class StonApiClient {
         ...normalizeRequest("/v1/pools", {
           method: "GET",
           query,
+        }),
+      ),
+    ).poolList;
+  }
+
+  public async queryPools({
+    unconditionalAssets: unconditionalAsset,
+    ...query
+  }: {
+    condition: string;
+    walletAddress?: string;
+    unconditionalAssets?: string[];
+    dexV2?: boolean;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
+        ...normalizeRequest("/v1/pool/query", {
+          method: "POST",
+          query: {
+            ...query,
+            unconditionalAsset,
+          },
         }),
       ),
     ).poolList;

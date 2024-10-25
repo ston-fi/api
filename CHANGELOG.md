@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.0]
+
+### Added
+
+- the `RouterInfo` structure was extended with `pool_creation_enabled` field
+- the `AssetInfo.tags` was moved to the new tags format. See `AssetTag` enum
+- `searchAssets` method parameters were extended with the optional `unconditionalAssets`
+- new `StonApiClient.queryPools` method
+
 ## [0.12.1]
 
 ### Fixed

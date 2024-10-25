@@ -6,4 +6,5 @@ export type RouterInfoResponse = {
   pton_version: string;
   pton_wallet_address: string;
   router_type: string;
+  pool_creation_enabled: boolean;
 };

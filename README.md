@@ -82,6 +82,12 @@ const walletAsset = await client.getWalletAsset({ assetAddress: 'EQ...', walletA
 // get list of all DEX pools
 const pools = await client.getPools();
 
+// get list of all DEX pools based on query condition
+const pools = await client.queryPools({
+  condition: `!${AssetTag.DefaultSymbol} & !${PoolTag.LiquidityProvisionNotRecommended}`,
+  walletAddress: 'UQ...',
+});
+
 // get pool info by it address
 const pool = await client.getPool('EQ...');
 
