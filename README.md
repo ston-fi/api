@@ -66,8 +66,8 @@ const assets = await client.queryAssets({
 
 // search assets across of all DEX assets based on search string and query condition
 const matchedAssets = await client.searchAssets({
-  searchString: "TON",
-  condition: `(!${AssetTag.Blacklisted} & ${AssetTag.LowLiquidity}) | ${AssetTag.DefaultSymbol}`,
+  searchString: "USD",
+  condition: `${AssetTag.LiquidityVeryHigh} | ${AssetTag.LiquidityHigh} | ${AssetTag.Popular}`,
   walletAddress: "UQ...",
 });
 
@@ -84,7 +84,7 @@ const pools = await client.getPools();
 
 // get list of all DEX pools based on query condition
 const pools = await client.queryPools({
-  condition: `!${AssetTag.DefaultSymbol} & !${PoolTag.LiquidityProvisionNotRecommended}`,
+  condition: `${AssetTag.LiquidityVeryHigh} | ${AssetTag.LiquidityHigh} | ${AssetTag.Popular}`,
   walletAddress: 'UQ...',
 });
 
