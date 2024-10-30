@@ -211,7 +211,10 @@ export class StonApiClient {
     ).poolList;
   }
 
-  public async simulateSwap(query: {
+  public async simulateSwap({
+    offerUnits: units,
+    ...query
+  }: {
     askAddress: string;
     offerAddress: string;
     offerUnits: string;
@@ -225,14 +228,17 @@ export class StonApiClient {
           method: "POST",
           query: {
             ...query,
-            units: query.offerUnits,
+            units,
           },
         }),
       ),
     );
   }
 
-  public async simulateReverseSwap(query: {
+  public async simulateReverseSwap({
+    askUnits: units,
+    ...query
+  }: {
     askAddress: string;
     askUnits: string;
     offerAddress: string;
@@ -246,7 +252,7 @@ export class StonApiClient {
           method: "POST",
           query: {
             ...query,
-            units: query.askUnits,
+            units,
           },
         }),
       ),

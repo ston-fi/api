@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1]
+
+### Fixed
+
+- remove sending of the `offer_units` parameter in the `simulateSwap` request alongside with the `units` parameter
+- remove sending sending of the `ask_units` parameter in the `simulateReverseSwap` request alongside with the `units` parameter
+
 ## [0.13.0]
 
 ### Added
