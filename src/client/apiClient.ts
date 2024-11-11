@@ -215,11 +215,40 @@ export class StonApiClient {
     offerUnits: units,
     ...query
   }: {
-    askAddress: string;
+    /** The address of the token we want to sell */
     offerAddress: string;
+    /** Number of token units we want to sell */
     offerUnits: string;
+    /** The address of the token we want to buy */
+    askAddress: string;
+    /**
+     * The maximum possible difference between the rates that we expect and which will actually be,
+     * in fractions (for example, 0.001 is 0.1%)
+     *
+     * Recommended value is 0.01 (1%)
+     */
     slippageTolerance: string;
+    /**
+     * Referral address
+     *
+     * @default undefined
+     */
     referralAddress?: string;
+    /**
+     * Referral fee in base points
+     *
+     * Applies only for dex v2, for v1 is always 10 (0.1%)
+     * Applies only if `referralAddress` is set
+     * Should be in range [0, 100] BPS
+     *
+     * @default undefined
+     */
+    referralFeeBps?: string;
+    /**
+     * If true V2 routers might be selected for the swap.
+     *
+     * @default false
+     */
     dexV2?: boolean;
   }) {
     return normalizeResponse(
@@ -239,11 +268,39 @@ export class StonApiClient {
     askUnits: units,
     ...query
   }: {
-    askAddress: string;
-    askUnits: string;
+    /** The address of the token we want to sell */
     offerAddress: string;
+    /** The address of the token we want to buy */
+    askAddress: string;
+    /** Number of token units we want to buy */
+    askUnits: string;
+    /**
+     * The maximum possible difference between the rates that we expect and which will actually be,
+     * in fractions (for example, 0.001 is 0.1%)
+     *
+     * Recommended value is 0.01 (1%)
+     */
     slippageTolerance: string;
+    /**
+     * Referral address
+     *
+     * @default undefined
+     */
     referralAddress?: string;
+    /**
+     * Referral fee in base points. Should be in range [0, 100] BPS
+     *
+     * Applies only if `referralAddress` is set
+     * Applies only for dex v2, for v1 is always 10 BPS (0.1%)
+     *
+     * @default undefined
+     */
+    referralFeeBps?: string;
+    /**
+     * If true V2 routers might be selected for the swap.
+     *
+     * @default false
+     */
     dexV2?: boolean;
   }) {
     return normalizeResponse(

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.14.0]
+
+- `simulateSwap` & `simulateReverseSwap` method parameters extended with the optional `referralFeeBps` filed
+- `simulateSwap` & `simulateReverseSwap` method parameters documented with JSDoc comments
+
 ## [0.13.1]
 
 ### Fixed
