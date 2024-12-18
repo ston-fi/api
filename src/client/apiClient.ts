@@ -7,10 +7,10 @@ import { normalizeResponse } from "./mappers/normalizeResponse";
 
 import type { AssetInfoResponse, AssetInfoV2Response } from "./types/asset";
 import type { FarmInfoResponse } from "./types/farm";
-import type { PoolInfoResponse } from "./types/pool";
-import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
 import type { OperationInfoResponse, OperationType } from "./types/operation";
+import type { PoolInfoResponse } from "./types/pool";
 import type { RouterInfoResponse } from "./types/router";
+import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
 
 export type StonApiClientOptions = {
   baseURL?: string;
@@ -421,7 +421,7 @@ export class StonApiClient {
     until: Date;
     walletAddress: string;
     dexV2?: boolean;
-    opType?: keyof typeof OperationType;
+    opType?: OperationType;
   }) {
     return normalizeResponse(
       await this.apiFetch<{ operations: OperationInfoResponse[] }>(

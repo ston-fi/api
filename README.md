@@ -141,9 +141,8 @@ const operations = await client.getWalletOperations({
   since: new Date('2024-06-01T12:00:00'),
   until: new Date('2024-08-06T21:00:00'),
   walletAddress: 'UQ...',
-  opType: 'SendLiquidity' // optional; see type definition
+  opType: OperationType.Swap, // optional; Only operations with the specified types. All operations if the opType is not specified
 });
-
 ```
 
 ## Roadmap

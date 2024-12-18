@@ -1,7 +1,7 @@
 {
   "name": "@ston-fi/api",
-  "version": "0.14.0",
-  "description": "JavaScript client for Ston.fi Http API",
+  "version": "0.15.0",
+  "description": "Typescript client for Ston.fi Http API",
   "license": "MIT",
   "homepage": "https://github.com/ston-fi/api#readme",
   "repository": {
@@ -10,6 +10,7 @@
   },
   "type": "module",
   "packageManager": "pnpm@9.0.0",
+  "files": ["dist", "package.json", "README.md", "CHANGELOG.md", "LICENSE"],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,43 +18,34 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.cjs"
     }
   },
-  "files": [
-    "dist",
-    "package.json",
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE"
-  ],
   "scripts": {
-    "prepare": "lefthook install",
     "preinstall": "npx only-allow pnpm",
+    "prepare": "lefthook install",
+    "cleanup": "rm -rf dist node_modules",
     "format": "pnpm run /^format:.*/",
-    "format:biome": "biome format ./* --write",
+    "format:biome": "biome format --write",
     "lint": "pnpm run /^lint:.*/",
     "lint:tsc": "tsc --noEmit --pretty",
-    "lint:biome": "biome check ./*",
+    "lint:biome": "biome check",
     "test": "vitest",
-    "build": "vite build",
-    "prepublishOnly": "pnpm i && pnpm run format && pnpm run lint && pnpm run test --run && pnpm run build"
+    "build": "tsup",
+    "prepublishOnly": "pnpm i && pnpm run format && pnpm run lint && pnpm run test --run && pnpm run build && npx --yes @arethetypeswrong/cli --pack . && npx --yes publint"
   },
   "dependencies": {
     "camelcase-keys": "9.1.3",
     "decamelize-keys": "2.0.1",
-    "ofetch": "1.3.4"
+    "ofetch": "1.4.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@vitest/coverage-v8": "1.6.0",
-    "lefthook": "1.8.0",
-    "rollup-plugin-visualizer": "5.12.0",
-    "typescript": "5.5.4",
-    "vite": "5.4.3",
-    "vite-plugin-dts": "3.9.1",
-    "vitest": "1.6.0"
+    "esbuild-analyzer": "0.2.0",
+    "lefthook": "1.9.3",
+    "tsup": "8.3.5",
+    "typescript": "^5",
+    "vitest": "2.1.8"
   }
 }

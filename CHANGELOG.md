@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.15.0]
+
+### Changed
+
+- [ofecth](https://github.com/unjs/ofetch/releases) dependency was updated from `1.3.4` to the latest `1.4.1` version
+- package build tool was changed from [vite](https://github.com/vitejs/vite) to [tsup](https://github.com/egoist/tsup) for better type declaration. Now we are successfully passing the [arethetypeswrong](https://github.com/arethetypeswrong/arethetypeswrong.github.io) checks
+
+### Added
+- added missed package description fields to the `package.json` file. Now we are successfully passing the [publint](https://github.com/bluwy/publint) checks
+
+### Fixed
+
+- correct type declaration for `getWalletOperations.opType` parameter. Now you can use values from `OperationType` enum instead of strings
+
 ## [0.14.0]
 
 - `simulateSwap` & `simulateReverseSwap` method parameters extended with the optional `referralFeeBps` filed

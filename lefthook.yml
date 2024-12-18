@@ -3,6 +3,7 @@
 
 pre-commit:
   commands:
-    check:
-      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+    format:
+      glob: "*"
+      run: npx @biomejs/biome format --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
       stage_fixed: true

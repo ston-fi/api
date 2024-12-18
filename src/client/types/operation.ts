@@ -1,14 +1,14 @@
 import type { AssetInfoResponse } from "./asset";
 
 export const OperationType = {
-  Swap: "swap",
-  SendLiquidity: "send_liquidity",
-  RefundLiquidity: "refund_liquidity",
-  AddLiquidity: "add_liquidity",
-  WithdrawLiquidity: "withdraw_liquidity",
-  SetFees: "set_fees",
-  CollectFees: "collect_fees",
-  ResetGas: "reset_gas",
+  Swap: "Swap",
+  SendLiquidity: "SendLiquidity",
+  RefundLiquidity: "RefundLiquidity",
+  AddLiquidity: "AddLiquidity",
+  WithdrawLiquidity: "WithdrawLiquidity",
+  SetFees: "SetFees",
+  CollectFees: "CollectFees",
+  ResetGas: "ResetGas",
 } as const;
 
 export type OperationType = (typeof OperationType)[keyof typeof OperationType];
