@@ -46,6 +46,7 @@ export type AssetInfoResponse = {
   symbol: string;
   third_party_price_usd?: string | null;
   wallet_address?: string | null;
+  popularity_index?: number;
   tags: AssetTag[];
   custom_payload_api_uri?: string;
   extensions?: string[];
@@ -66,6 +67,7 @@ export type AssetInfoV2Response = {
   dex_price_usd?: string;
   meta?: AssetV2Meta;
   pair_priority?: number;
+  popularity_index?: number;
   tags?: AssetTag[];
   wallet_address?: string;
   extensions?: string[];

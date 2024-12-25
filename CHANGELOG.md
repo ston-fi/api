@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.16.0]
+
+### Added
+- asset info that returns from asset-related methods was extended with the `popularityIndex` filed. This index is calculated based on the TVL of the pools with this asset on DEX. It could be used to be one of the ways to sort assets
+
 ## [0.15.0]
 
 ### Changed
