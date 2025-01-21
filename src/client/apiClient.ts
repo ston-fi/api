@@ -189,6 +189,23 @@ export class StonApiClient {
     ).poolList;
   }
 
+  public async getPoolsByAssetPair(query: {
+    asset0Address: string;
+    asset1Address: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
+        ...normalizeRequest(
+          "/v1/pools/by_market/{asset0Address}/{asset1Address}",
+          {
+            method: "GET",
+            query,
+          },
+        ),
+      ),
+    ).poolList;
+  }
+
   public async queryPools({
     unconditionalAssets: unconditionalAsset,
     ...query

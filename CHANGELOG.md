@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.17.0]
+
+### Added
+
+- `getPoolsByAssetPair` method for getting a list of the pools for a given pair of assets
+
 ## [0.16.0]
 
 ### Added

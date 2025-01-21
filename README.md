@@ -88,6 +88,12 @@ const pools = await client.queryPools({
   walletAddress: 'UQ...',
 });
 
+// get list of pools with the given asset pair
+const pools = await client.getPoolsByAssetPair({
+  asset0Address: "EQ...",
+  asset1Address: "EQ...",
+});
+
 // get pool info by it address
 const pool = await client.getPool('EQ...');
 
