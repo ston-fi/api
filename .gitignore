@@ -11,7 +11,7 @@ node_modules
 dist
 coverage
 *.local
-build-report.html
+*.local.*
 
 # Editor directories and files
 .vscode

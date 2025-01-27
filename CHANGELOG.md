@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.18.0]
+
+- the package build config was updated to fix the CJS version of the package on node < 22.
+- dev dependecies was updated
+
 ## [0.17.0]
 
 ### Added

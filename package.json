@@ -1,6 +1,6 @@
 {
   "name": "@ston-fi/api",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "Typescript client for Ston.fi Http API",
   "license": "MIT",
   "homepage": "https://github.com/ston-fi/api#readme",
@@ -11,21 +11,21 @@
   "type": "module",
   "packageManager": "pnpm@9.0.0",
   "files": ["dist", "package.json", "README.md", "CHANGELOG.md", "LICENSE"],
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "sideEffects": false,
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/index.js",
-      "default": "./dist/index.cjs"
+      "import": "./dist/esm/index.js",
+      "default": "./dist/cjs/index.cjs"
     }
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "lefthook install",
-    "cleanup": "rm -rf dist node_modules",
+    "cleanup": "rm -rf coverage dist node_modules",
     "format": "pnpm run /^format:.*/",
     "format:biome": "biome format --write",
     "lint": "pnpm run /^lint:.*/",
@@ -41,13 +41,13 @@
     "ofetch": "1.4.1"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.2",
-    "@biomejs/biome": "1.9.4",
-    "esbuild-analyzer": "0.2.0",
-    "lefthook": "1.10.0",
-    "publint": "^0.2.12",
-    "tsup": "8.3.5",
+    "@arethetypeswrong/cli": "^0.17.3",
+    "@biomejs/biome": "^1.9.4",
+    "esbuild-analyzer": "^0.2.0",
+    "lefthook": "^1.10.10",
+    "publint": "^0.3.2",
+    "tsup": "8.3.6",
     "typescript": "^5",
-    "vitest": "2.1.8"
+    "vitest": "^3"
   }
 }
