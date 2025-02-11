@@ -3,6 +3,7 @@ import type { StonApiClient } from "./client/apiClient";
 export { StonApiClient, type StonApiClientOptions } from "./client/apiClient";
 export { AssetKind, AssetTag } from "./client/types/asset";
 export { OperationType } from "./client/types/operation";
+export { LiquidityProvisionType } from "./client/types/liquidityProvision";
 
 export type AssetInfo = Awaited<ReturnType<StonApiClient["getAssets"]>>[number];
 export type AssetInfoV2 = Awaited<
@@ -22,3 +23,6 @@ export type OperationInfo = Awaited<
 export type RouterInfo = Awaited<
   ReturnType<StonApiClient["getRouters"]>
 >[number];
+export type LiquidityProvisionSimulation = Awaited<
+  ReturnType<StonApiClient["simulateLiquidityProvision"]>
+>;

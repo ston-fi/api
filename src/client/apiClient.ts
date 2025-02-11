@@ -7,6 +7,10 @@ import { normalizeResponse } from "./mappers/normalizeResponse";
 
 import type { AssetInfoResponse, AssetInfoV2Response } from "./types/asset";
 import type { FarmInfoResponse } from "./types/farm";
+import type {
+  LiquidityProvisionSimulationQuery,
+  LiquidityProvisionSimulationResponse,
+} from "./types/liquidityProvision";
 import type { OperationInfoResponse, OperationType } from "./types/operation";
 import type { PoolInfoResponse } from "./types/pool";
 import type { RouterInfoResponse } from "./types/router";
@@ -117,9 +121,7 @@ export class StonApiClient {
     ).farm;
   }
 
-  public async getFarms(query?: {
-    dexV2?: boolean;
-  }) {
+  public async getFarms(query?: { dexV2?: boolean }) {
     return normalizeResponse(
       await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
         ...normalizeRequest("/v1/farms", {
@@ -328,6 +330,19 @@ export class StonApiClient {
             ...query,
             units,
           },
+        }),
+      ),
+    );
+  }
+
+  public async simulateLiquidityProvision(
+    query: LiquidityProvisionSimulationQuery,
+  ) {
+    return normalizeResponse(
+      await this.apiFetch<LiquidityProvisionSimulationResponse>(
+        ...normalizeRequest("/v1/liquidity_provision/simulate", {
+          method: "POST",
+          query,
         }),
       ),
     );

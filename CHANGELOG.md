@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.19.0]
+
+### Added
+
+- `simulateLiquidityProvision` method for simulation of pool creation/deposit operations
+
 ## [0.18.0]
 
 - the package build config was updated to fix the CJS version of the package on node < 22.

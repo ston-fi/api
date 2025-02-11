@@ -134,6 +134,53 @@ const swapReverseSimulation = await client.simulateReverseSwap({ /** */ });
 // get swap status by it id and some additional info (e.g. wallet address, etc.)
 const swapStatus = await client.getSwapStatus({ /** */ });
 
+// * liquidity provision
+
+// Simulate new pool creation with a ratio based on provided token amounts
+const initialLiquidityProvision = await client.simulateLiquidityProvision({
+  provisionType: LiquidityProvisionType.Initial,
+  slippageTolerance: '0.001',
+  tokenA: 'EQ...',
+  tokenB: 'EQ...',
+  tokenAUnits: '1000',
+  tokenBUnits: '1000',
+});
+
+// Simulate adding liquidity to an existing pool at the current pool ratio
+// Only one amount is required; Corresponding second amount will be calculated during the simulation
+const balancedLiquidityProvision = await client.simulateLiquidityProvision({
+  provisionType: LiquidityProvisionType.Balanced,
+  poolAddress: 'EQ...',
+  slippageTolerance: '0.001',
+  tokenA: 'EQ...',
+  tokenB: 'EQ...',
+  tokenAUnits: '1000',
+});
+
+// Simulate adding liquidity with an arbitrary ratio based on provided token amounts
+// During provisioning, your funds will be swapped to match the required pool ratio
+const arbitraryLiquidityProvision = await client.simulateLiquidityProvision({
+  provisionType: LiquidityProvisionType.Arbitrary,
+  poolAddress: 'EQ...',
+  slippageTolerance: '0.001',
+  tokenA: 'EQ...',
+  tokenB: 'EQ...',
+  tokenAUnits: '1000',
+  tokenBUnits: '2000',
+});
+
+// Simulate single side adding liquidity
+// Is a special case of arbitrary liquidity provision when the ratio is 100 to 0
+const arbitrarySinglesideLiquidityProvision = await client.simulateLiquidityProvision({
+  provisionType: LiquidityProvisionType.Arbitrary,
+  tokenA: 'EQ...',
+  tokenB: 'EQ...',
+  poolAddress: 'EQ...',
+  slippageTolerance: '0.001',
+  tokenAUnits: '1000',
+  tokenBUnits: '0', // require explicit zero value
+});
+
 // * operations
 
 // get list of ALL operations during specified period of time on the platform
