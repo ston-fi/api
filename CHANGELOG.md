@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.20.0]
+
+### Added
+
+- new `asset:essential` AssetTag
+
 ## [0.19.0]
 
 ### Added

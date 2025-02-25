@@ -7,6 +7,7 @@ export const AssetKind = {
 export type AssetKind = keyof typeof AssetKind;
 
 export const AssetTag = {
+  Essential: "asset:essential",
   Blacklisted: "asset:blacklisted",
   Deprecated: "asset:deprecated",
   DefaultSymbol: "asset:default_symbol",

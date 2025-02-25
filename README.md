@@ -60,14 +60,21 @@ const asset = await client.getAsset('EQ...');
 
 // get list of all DEX assets based on query condition
 const assets = await client.queryAssets({
-  condition: `${AssetTag.DefaultSymbol} | ${AssetTag.WalletHasBalance}`,
+  condition: [
+    AssetTag.Essential,
+    AssetTag.Popular,
+    AssetTag.WalletHasBalance,
+  ].join(' | '),
   walletAddress: 'UQ...',
 });
 
 // search assets across of all DEX assets based on search string and query condition
 const matchedAssets = await client.searchAssets({
   searchString: "USD",
-  condition: `${AssetTag.LiquidityVeryHigh} | ${AssetTag.LiquidityHigh} | ${AssetTag.Popular}`,
+    condition: [
+    AssetTag.LiquidityVeryHigh,
+    AssetTag.LiquidityHigh, 
+  ].join(' | '),
   walletAddress: "UQ...",
 });
 
