@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0]
+
+### Added
+
+- new optional `dexVersion` parameter for `simulateSwap` & `simulateReverseSwap` methods
+- updated JsDock comments for the `dexV2` parameter in methods where it used
+
 ## [0.20.0]
 
 ### Added

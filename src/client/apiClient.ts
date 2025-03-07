@@ -121,7 +121,14 @@ export class StonApiClient {
     ).farm;
   }
 
-  public async getFarms(query?: { dexV2?: boolean }) {
+  public async getFarms(query?: {
+    /**
+     * If true farms for V2 pools will be present in the response.
+     *
+     * @default true
+     */
+    dexV2?: boolean;
+  }) {
     return normalizeResponse(
       await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
         ...normalizeRequest("/v1/farms", {
@@ -143,7 +150,14 @@ export class StonApiClient {
     ).farmList;
   }
 
-  public async getSwapPairs(query?: { dexV2?: boolean }) {
+  public async getSwapPairs(query?: {
+    /**
+     * If true V2 pool pairs will be present in the response.
+     *
+     * @default true
+     */
+    dexV2?: boolean;
+  }) {
     return normalizeResponse(
       await this.apiFetch<{ pairs: [string, string][] }>(
         ...normalizeRequest("/v1/markets", {
@@ -180,7 +194,14 @@ export class StonApiClient {
     ).pool;
   }
 
-  public async getPools(query?: { dexV2?: boolean }) {
+  public async getPools(query?: {
+    /**
+     * If true V2 pools will be present in the response.
+     *
+     * @default true
+     */
+    dexV2?: boolean;
+  }) {
     return normalizeResponse(
       await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
         ...normalizeRequest("/v1/pools", {
@@ -215,6 +236,11 @@ export class StonApiClient {
     condition: string;
     walletAddress?: string;
     unconditionalAssets?: string[];
+    /**
+     * If true V2 pools will be present in the response.
+     *
+     * @default true
+     */
     dexV2?: boolean;
   }) {
     return normalizeResponse(
@@ -264,11 +290,17 @@ export class StonApiClient {
      */
     referralFeeBps?: string;
     /**
-     * If true V2 routers might be selected for the swap.
+     * If true V2 pools might be selected for the swap.
      *
-     * @default false
+     * @default true
      */
     dexV2?: boolean;
+    /**
+     * Allows to restrict exact DEX version (or multiple) to be used for the swap.
+     *
+     * @default undefined
+     */
+    dexVersion?: Array<"1" | 1 | "2" | 2>;
   }) {
     return normalizeResponse(
       await this.apiFetch<SwapSimulationResponse>(
@@ -316,11 +348,17 @@ export class StonApiClient {
      */
     referralFeeBps?: string;
     /**
-     * If true V2 routers might be selected for the swap.
+     * If true V2 pools might be selected for the swap.
      *
-     * @default false
+     * @default true
      */
     dexV2?: boolean;
+    /**
+     * Allows to restrict exact DEX version (or multiple) to be used for the swap.
+     *
+     * @default undefined
+     */
+    dexVersion?: Array<"1" | 1 | "2" | 2>;
   }) {
     return normalizeResponse(
       await this.apiFetch<SwapSimulationResponse>(
@@ -405,7 +443,22 @@ export class StonApiClient {
   }
 
   public async getWalletFarms(
-    data: string | { walletAddress: string; dexV2?: boolean },
+    /**
+     * Wallet address.
+     *
+     * @deprecated Use object with `walletAddress` property instead.
+     */
+    data:
+      | string
+      | {
+          walletAddress: string;
+          /**
+           * If true farms for V2 pools will be present in the response.
+           *
+           * @default true
+           */
+          dexV2?: boolean;
+        },
   ) {
     return normalizeResponse(
       await this.apiFetch<{ farm_list: FarmInfoResponse[] }>(
@@ -432,7 +485,22 @@ export class StonApiClient {
   }
 
   public async getWalletPools(
-    data: string | { walletAddress: string; dexV2?: boolean },
+    /**
+     * Wallet address.
+     *
+     * @deprecated Use object with `walletAddress` property instead.
+     */
+    data:
+      | string
+      | {
+          walletAddress: string;
+          /**
+           * If true V2 pools will be present in the response.
+           *
+           * @default true
+           */
+          dexV2?: boolean;
+        },
   ) {
     return normalizeResponse(
       await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
@@ -452,6 +520,11 @@ export class StonApiClient {
     since: Date;
     until: Date;
     walletAddress: string;
+    /**
+     * If true V2 pool operations will be present in the response.
+     *
+     * @default true
+     */
     dexV2?: boolean;
     opType?: OperationType;
   }) {
@@ -483,7 +556,14 @@ export class StonApiClient {
     ).operations;
   }
 
-  public async getRouters(query?: { dexV2?: boolean }) {
+  public async getRouters(query?: {
+    /**
+     * If true V2 routers will be present in the response.
+     *
+     * @default true
+     */
+    dexV2?: boolean;
+  }) {
     return normalizeResponse(
       await this.apiFetch<{ router_list: RouterInfoResponse[] }>(
         ...normalizeRequest("/v1/routers", {
