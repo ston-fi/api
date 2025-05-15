@@ -23,4 +23,5 @@ export type PoolInfoResponse = {
   token0_balance?: string | null;
   token1_address: string;
   token1_balance?: string | null;
+  volume_24h_usd?: string | null;
 };

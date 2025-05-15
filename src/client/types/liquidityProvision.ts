@@ -65,12 +65,15 @@ export type LiquidityProvisionSimulationResponse = {
   token_b: string;
   token_a_units: string;
   token_b_units: string;
-  lp_account_address: string;
+  lp_account_address?: string | null;
   lp_account_token_a_balance: string;
   lp_account_token_b_balance: string;
   estimated_lp_units: string;
   min_lp_units: string;
   min_token_a_units: string;
   min_token_b_units: string;
+  estimated_token_a_rate: string;
+  estimated_token_b_rate: string;
   lp_total_supply: string;
+  price_impact: string;
 };

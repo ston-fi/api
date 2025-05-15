@@ -1,5 +1,39 @@
 # Changelog
 
+## [0.22.0]
+
+### Added
+
+- `PoolInfoResponse` was extended with new fields:
+  - `volume_24h_usd`
+
+- `LiquidityProvisionSimulationResponse` was extended with new fields:
+  - `estimated_token_a_rate`
+  - `estimated_token_b_rate`
+  - `price_impact`
+
+- `FarmInfoResponse` was extended with new fields:
+  - `version`
+  - `rewards`
+  - `locked_total_lp`
+  - `locked_total_lp_usd`
+  - `all_rewards_distributed`
+  - `meta`
+  - `owner_address`
+  - `custodian_address`
+  - `create_timestamp`
+
+- `FarmNftInfoResponse` was extended with a new field:
+  - `unstake_timestamp`
+
+### Changed
+
+- `LiquidityProvisionSimulationResponse` field `lp_account_address` now correctly typed as optional.
+
+### Removed
+
+- `FarmInfoResponse` field `reward_token_address` was removed. Since v3 farms can distribute multiple rewards, use the `rewards` field instead to access information about each farm reward pool 
+
 ## [0.21.0]
 
 ### Added
