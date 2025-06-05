@@ -8,6 +8,12 @@ import { normalizeResponse } from "./mappers/normalizeResponse";
 import type { AssetInfoResponse, AssetInfoV2Response } from "./types/asset";
 import type { FarmInfoResponse } from "./types/farm";
 import type {
+  AssetsFeeStatsResponse,
+  OperationFeeStat,
+  VaultFeeInfo,
+  WithdrawalFeeStat,
+} from "./types/fee";
+import type {
   LiquidityProvisionSimulationQuery,
   LiquidityProvisionSimulationResponse,
 } from "./types/liquidityProvision";
@@ -512,6 +518,19 @@ export class StonApiClient {
     ).poolList;
   }
 
+  public async getWalletVaultsFee(query: {
+    walletAddress: string;
+  }) {
+    return normalizeResponse(
+      await this.apiFetch<{ vault_list: VaultFeeInfo[] }>(
+        ...normalizeRequest("/v1/wallets/{walletAddress}/fee_vaults", {
+          method: "GET",
+          query,
+        }),
+      ),
+    ).vaultList;
+  }
+
   public async getWalletOperations({
     since,
     until,
@@ -550,6 +569,63 @@ export class StonApiClient {
           query: {
             since: normalizeDate(since),
             until: normalizeDate(until),
+          },
+        }),
+      ),
+    ).operations;
+  }
+
+  public async getAssetsFeeStats({
+    since,
+    until,
+    referrerAddress,
+  }: { since: Date; until: Date; referrerAddress: string }) {
+    return normalizeResponse(
+      await this.apiFetch<AssetsFeeStatsResponse>(
+        ...normalizeRequest("/v1/stats/fees", {
+          method: "GET",
+          query: {
+            since: normalizeDate(since),
+            until: normalizeDate(until),
+            referrerAddress,
+          },
+        }),
+      ),
+    );
+  }
+
+  public async getWithdrawalsFeeStats({
+    since,
+    until,
+    referrerAddress,
+  }: { since: Date; until: Date; referrerAddress: string }) {
+    return normalizeResponse(
+      await this.apiFetch<{ withdrawals: WithdrawalFeeStat[] }>(
+        ...normalizeRequest("/v1/stats/fee_withdrawals", {
+          method: "GET",
+          query: {
+            since: normalizeDate(since),
+            until: normalizeDate(until),
+            referrerAddress,
+          },
+        }),
+      ),
+    ).withdrawals;
+  }
+
+  public async getAccrualsFeeStats({
+    since,
+    until,
+    referrerAddress,
+  }: { since: Date; until: Date; referrerAddress: string }) {
+    return normalizeResponse(
+      await this.apiFetch<{ operations: OperationFeeStat[] }>(
+        ...normalizeRequest("/v1/stats/fee_accruals", {
+          method: "GET",
+          query: {
+            since: normalizeDate(since),
+            until: normalizeDate(until),
+            referrerAddress,
           },
         }),
       ),

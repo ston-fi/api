@@ -74,6 +74,8 @@ export type LiquidityProvisionSimulationResponse = {
   min_token_b_units: string;
   estimated_token_a_rate: string;
   estimated_token_b_rate: string;
+  estimated_token_a_units: string;
+  estimated_token_b_units: string;
   lp_total_supply: string;
   price_impact: string;
 };

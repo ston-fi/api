@@ -26,3 +26,15 @@ export type RouterInfo = Awaited<
 export type LiquidityProvisionSimulation = Awaited<
   ReturnType<StonApiClient["simulateLiquidityProvision"]>
 >;
+export type AssetFeeStat = Awaited<
+  ReturnType<StonApiClient["getAssetsFeeStats"]>
+>["assetsFeeStats"][number];
+export type WithdrawalFeeStat = Awaited<
+  ReturnType<StonApiClient["getWithdrawalsFeeStats"]>
+>[number];
+export type OperationFeeStat = Awaited<
+  ReturnType<StonApiClient["getAccrualsFeeStats"]>
+>[number];
+export type VaultFeeInfo = Awaited<
+  ReturnType<StonApiClient["getWalletVaultsFee"]>
+>[number];

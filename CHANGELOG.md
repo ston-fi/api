@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.23.0]
+
+### Added
+- `StonApiClient.getWalletVaultsFee` method
+- `StonApiClient.getAssetsFeeStats` method
+- `StonApiClient.getWithdrawalsFeeStats` method
+- `StonApiClient.getAccrualsFeeStats` method
+- `LiquidityProvisionSimulationResponse` was extended with new fields:
+  - `estimated_token_a_units`
+  - `estimated_token_b_units`
+
 ## [0.22.0]
 
 ### Added
