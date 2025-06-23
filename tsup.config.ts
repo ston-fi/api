@@ -1,6 +1,6 @@
 // @ts-ignore - esbuild-analyzer package is not typed
 import AnalyzerPlugin from "esbuild-analyzer";
-import { type Options, defineConfig } from "tsup";
+import { defineConfig, type Options } from "tsup";
 
 const sharedOptions = {
   entryPoints: ["src/", "!src/**/*.test.ts"],

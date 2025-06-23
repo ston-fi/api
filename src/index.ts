@@ -2,8 +2,8 @@ import type { StonApiClient } from "./client/apiClient";
 
 export { StonApiClient, type StonApiClientOptions } from "./client/apiClient";
 export { AssetKind, AssetTag } from "./client/types/asset";
-export { OperationType } from "./client/types/operation";
 export { LiquidityProvisionType } from "./client/types/liquidityProvision";
+export { OperationType } from "./client/types/operation";
 
 export type AssetInfo = Awaited<ReturnType<StonApiClient["getAssets"]>>[number];
 export type AssetInfoV2 = Awaited<
