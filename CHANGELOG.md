@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.24.0]
+
+### Added
+
+- `simulateSwap` method parameters were extended with new fields:
+  - `poolAddress`
+
+- `simulateReverseSwap` method parameters were extended with new fields:
+  - `poolAddress`
+
+- `SwapSimulationResponse` was extended with new fields:
+  - `recommendedSlippageTolerance` Recommended difference between the original price of the order and the final price (considering potential sandwich attack)
+  - `recommendedMinAskUnits` Recommended minimal amount of ask units (considering potential sandwich attack)
+  - `swapRate`
+  - `gasParams`
+    - `gasBudget` Optional TON gas budget for transaction
+    - `forwardGas` Forward TON amount for transaction
+    - `estimatedGasConsumption` Estimated gas consumption
+
+- `PoolInfoResponse` was extended with new fields:
+  - `amp` Stable swap amplification parameter
+  - `rate` Stable token ratio parameter
+  - `w0` Token 0 weight parameter
+
 ## [0.23.0]
 
 ### Added

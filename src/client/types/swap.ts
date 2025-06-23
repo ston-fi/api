@@ -1,3 +1,5 @@
+import type { GasParams } from "./gas";
+
 export type SwapSimulationResponse = {
   ask_address: string;
   ask_jetton_wallet: string;
@@ -14,6 +16,9 @@ export type SwapSimulationResponse = {
   router_address: string;
   slippage_tolerance: string;
   swap_rate: string;
+  recommended_slippage_tolerance: string;
+  recommended_min_ask_units: string;
+  gas_params: GasParams;
 };
 
 export type SwapStatusResponse =

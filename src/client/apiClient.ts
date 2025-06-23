@@ -307,6 +307,12 @@ export class StonApiClient {
      * @default undefined
      */
     dexVersion?: Array<"1" | 1 | "2" | 2>;
+    /**
+     * Pool address
+     *
+     * @default undefined
+     */
+    poolAddress?: string;
   }) {
     return normalizeResponse(
       await this.apiFetch<SwapSimulationResponse>(
@@ -365,6 +371,12 @@ export class StonApiClient {
      * @default undefined
      */
     dexVersion?: Array<"1" | 1 | "2" | 2>;
+    /**
+     * Pool address
+     *
+     * @default undefined
+     */
+    poolAddress?: string;
   }) {
     return normalizeResponse(
       await this.apiFetch<SwapSimulationResponse>(
