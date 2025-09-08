@@ -1,4 +1,4 @@
-import { camelcaseKeys } from "../../utils/camelcaseKeys";
+import { camelcaseHumps } from "../../utils/camelcaseHumps";
 import { denullifyValues } from "../../utils/denullifyValues";
 
 /**
@@ -9,5 +9,5 @@ import { denullifyValues } from "../../utils/denullifyValues";
 export function normalizeResponse<T extends Record<string, unknown>>(
   response: T,
 ) {
-  return denullifyValues(camelcaseKeys(response));
+  return denullifyValues(camelcaseHumps(response));
 }
