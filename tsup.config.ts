@@ -5,7 +5,6 @@ import { defineConfig, type Options } from "tsup";
 const sharedOptions = {
   entryPoints: ["src/", "!src/**/*.test.ts"],
   dts: true,
-  clean: true,
   sourcemap: true,
   splitting: true,
   noExternal: ["humps", "ofetch"],
@@ -14,6 +13,7 @@ const sharedOptions = {
 export default defineConfig([
   {
     ...sharedOptions,
+    clean: true,
     platform: "browser",
     format: "esm",
     outDir: "dist/esm",
@@ -25,6 +25,7 @@ export default defineConfig([
   },
   {
     ...sharedOptions,
+    clean: false,
     format: "cjs",
     outDir: "dist/cjs",
     esbuildPlugins: [
