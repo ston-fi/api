@@ -1,6 +1,6 @@
 {
-  "name": "stonfi-api-bare-compatible",
-  "version": "0.24.1-beta.0",
+  "name": "@ston-fi/api",
+  "version": "0.24.1",
   "description": "Typescript client for Ston.fi Http API",
   "license": "MIT",
   "homepage": "https://github.com/ston-fi/api#readme",
