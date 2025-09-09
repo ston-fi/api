@@ -1,7 +1,7 @@
 import type { FetchOptions } from "ofetch";
 
 import { toUrlSafe } from "../../utils/toUrlSafe";
-import { decamelizeHumps } from "../../utils/camelcaseHumps";
+import { decamelizeHumps } from "../../utils/camelcase";
 
 /**
  * Apply following transformations to the fetch request:

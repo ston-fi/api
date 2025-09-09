@@ -8,12 +8,13 @@ const sharedOptions = {
   clean: true,
   sourcemap: true,
   splitting: true,
-  noExternal: ["camelcase-keys", "decamelize-keys"],
+  noExternal: ["humps", "ofetch"],
 } satisfies Options;
 
 export default defineConfig([
   {
     ...sharedOptions,
+    platform: "browser",
     format: "esm",
     outDir: "dist/esm",
     esbuildPlugins: [

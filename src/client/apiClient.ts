@@ -46,7 +46,7 @@ export class StonApiClient {
     );
 
     this.apiFetch = ofetch.create({
-      baseURL: `${baseUrl.origin}${baseUrl.pathname}`,
+      baseURL: `${baseUrl.origin ?? baseUrl.href}${baseUrl.pathname}`,
       query: baseQuery,
     });
   }

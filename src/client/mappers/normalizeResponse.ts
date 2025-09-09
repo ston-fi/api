@@ -1,4 +1,4 @@
-import { camelcaseHumps } from "../../utils/camelcaseHumps";
+import { camelcaseHumps } from "../../utils/camelcase";
 import { denullifyValues } from "../../utils/denullifyValues";
 
 /**

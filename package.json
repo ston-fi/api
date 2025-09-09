@@ -26,6 +26,7 @@
     ".": {
       "types": "./dist/esm/index.d.ts",
       "import": "./dist/esm/index.js",
+      "bare": "./dist/esm/index.js",
       "require": "./dist/cjs/index.cjs"
     }
   },
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
+    "type-fest": "4.41.0",
     "@biomejs/biome": "2.0.4",
     "@types/humps": "^2.0.6",
     "esbuild-analyzer": "0.2.0",
