@@ -8,7 +8,7 @@ const sharedOptions = {
   clean: true,
   sourcemap: true,
   splitting: true,
-  noExternal: ["camelcase-keys", "decamelize-keys"],
+  noExternal: ["humps"],
 } satisfies Options;
 
 export default defineConfig([
@@ -29,6 +29,18 @@ export default defineConfig([
     esbuildPlugins: [
       AnalyzerPlugin({
         outfile: "./build-report-cjs.local.html",
+      }),
+    ],
+  },
+  {
+    ...sharedOptions,
+    noExternal: ["humps", "ofetch"],
+    platform: "browser",
+    format: "esm",
+    outDir: "dist/bare",
+    esbuildPlugins: [
+      AnalyzerPlugin({
+        outfile: "./build-report-bare.local.html",
       }),
     ],
   },

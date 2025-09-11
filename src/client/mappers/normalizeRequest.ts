@@ -1,6 +1,6 @@
 import type { FetchOptions } from "ofetch";
 
-import { decamelizeKeys } from "../../utils/decamelizeKeys";
+import { decamelizeHumps } from "../../utils/camelcase";
 import { toUrlSafe } from "../../utils/toUrlSafe";
 
 /**
@@ -33,7 +33,7 @@ export function normalizeRequest<T extends FetchOptions>(
       }
     }
 
-    options.query = decamelizeKeys(options.query);
+    options.query = decamelizeHumps(options.query);
   }
 
   return [pathWithParams, options] as const;
