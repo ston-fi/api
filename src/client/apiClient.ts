@@ -20,6 +20,7 @@ import type {
 import type { OperationInfoResponse, OperationType } from "./types/operation";
 import type { PoolInfoResponse } from "./types/pool";
 import type { RouterInfoResponse } from "./types/router";
+import type { StakingStatsResponse, WalletStakesResponse } from "./types/stake";
 import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
 
 export type StonApiClientOptions = {
@@ -32,22 +33,8 @@ export class StonApiClient {
   private readonly apiFetch;
 
   constructor(options?: StonApiClientOptions) {
-    // Following code is needed to carry over the query params
-    // from "options.baseUrl" to all requests because "ofetch" doesn't do it automatically
-    // "ofetch('/baz', { baseURL: 'http://site.com?foo=bar' })" > "http://site.com?foo=bar/baz"
-
-    const baseUrl = new URL(
-      options?.baseURL ?? options?.baseUrl ?? "https://api.ston.fi",
-    );
-    const baseQuery = [...new URLSearchParams(baseUrl.search)].reduce(
-      // biome-ignore lint/performance/noAccumulatingSpread: it's ok here
-      (acc, [key, value]) => ({ ...acc, [key]: value }),
-      {},
-    );
-
     this.apiFetch = ofetch.create({
-      baseURL: `${baseUrl.origin}${baseUrl.pathname}`,
-      query: baseQuery,
+      baseURL: options?.baseURL ?? options?.baseUrl ?? "https://api.ston.fi",
     });
   }
 
@@ -530,6 +517,17 @@ export class StonApiClient {
     ).poolList;
   }
 
+  public async getWalletStakes(query: { walletAddress: string }) {
+    return normalizeResponse(
+      await this.apiFetch<WalletStakesResponse>(
+        ...normalizeRequest("/v1/wallets/{walletAddress}/stakes", {
+          method: "GET",
+          query,
+        }),
+      ),
+    );
+  }
+
   public async getWalletVaultsFee(query: { walletAddress: string }) {
     return normalizeResponse(
       await this.apiFetch<{ vault_list: VaultFeeInfo[] }>(
@@ -652,6 +650,16 @@ export class StonApiClient {
         }),
       ),
     ).operations;
+  }
+
+  public async getStakingStats() {
+    return normalizeResponse(
+      await this.apiFetch<StakingStatsResponse>(
+        ...normalizeRequest("/v1/stats/staking", {
+          method: "GET",
+        }),
+      ),
+    );
   }
 
   public async getRouters(query?: {

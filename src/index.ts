@@ -4,6 +4,7 @@ export { StonApiClient, type StonApiClientOptions } from "./client/apiClient";
 export { AssetKind, AssetTag } from "./client/types/asset";
 export { LiquidityProvisionType } from "./client/types/liquidityProvision";
 export { OperationType } from "./client/types/operation";
+export { StakeNftStatus } from "./client/types/stake";
 
 export type AssetInfo = Awaited<ReturnType<StonApiClient["getAssets"]>>[number];
 export type AssetInfoV2 = Awaited<
@@ -38,3 +39,10 @@ export type OperationFeeStat = Awaited<
 export type VaultFeeInfo = Awaited<
   ReturnType<StonApiClient["getWalletVaultsFee"]>
 >[number];
+export type WalletStakesInfo = Awaited<
+  ReturnType<StonApiClient["getWalletStakes"]>
+>;
+export type StakeNft = NonNullable<WalletStakesInfo["nfts"]>[number];
+export type StakingStats = Awaited<
+  ReturnType<StonApiClient["getStakingStats"]>
+>;

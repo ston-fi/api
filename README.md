@@ -188,6 +188,14 @@ const arbitrarySinglesideLiquidityProvision = await client.simulateLiquidityProv
   tokenBUnits: '0', // require explicit zero value
 });
 
+// * stake
+
+// get list of ALL wallet stake NFT's & stakes summary
+const walletStakes = await client.getWalletStakes({ walletAddress: 'UQAQnxLqlX2B6w4jQzzzPWA8eyWZVZBz6Y0D_8noARLOaEAn' });
+
+// get global stats about the Ston.fi staking
+const stakingStats = await client.getStakingStats();
+
 // * operations
 
 // get list of ALL operations during specified period of time on the platform

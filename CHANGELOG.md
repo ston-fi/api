@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.25.0]
+
+### Added
+  - `StonApiClient.getWalletStakes` method
+  - `StonApiClient.getStakingStats` method
+
+### Changed
+  - updated package exports declaration
+  - updated dev dependencies
+  - dropped `baseURL` search params carrying to the API calls
+
 ## [0.24.0]
 
 ### Added
