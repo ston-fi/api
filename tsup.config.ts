@@ -5,16 +5,15 @@ import { defineConfig, type Options } from "tsup";
 const sharedOptions = {
   entryPoints: ["src/", "!src/**/*.test.ts"],
   dts: true,
+  clean: true,
   sourcemap: true,
   splitting: true,
-  noExternal: ["humps", "ofetch"],
+  noExternal: ["humps"],
 } satisfies Options;
 
 export default defineConfig([
   {
     ...sharedOptions,
-    clean: true,
-    platform: "browser",
     format: "esm",
     outDir: "dist/esm",
     esbuildPlugins: [
@@ -25,12 +24,23 @@ export default defineConfig([
   },
   {
     ...sharedOptions,
-    clean: false,
     format: "cjs",
     outDir: "dist/cjs",
     esbuildPlugins: [
       AnalyzerPlugin({
         outfile: "./build-report-cjs.local.html",
+      }),
+    ],
+  },
+  {
+    ...sharedOptions,
+    noExternal: ["humps", "ofetch"],
+    platform: "browser",
+    format: "esm",
+    outDir: "dist/bare",
+    esbuildPlugins: [
+      AnalyzerPlugin({
+        outfile: "./build-report-bare.local.html",
       }),
     ],
   },

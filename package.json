@@ -1,6 +1,6 @@
 {
   "name": "@ston-fi/api",
-  "version": "0.24.1",
+  "version": "0.24.0",
   "description": "Typescript client for Ston.fi Http API",
   "license": "MIT",
   "homepage": "https://github.com/ston-fi/api#readme",
@@ -21,6 +21,10 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "bare": {
+        "types": "./dist/bare/index.d.ts",
+        "default": "./dist/bare/index.js"
+      },
       "import": {
         "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
