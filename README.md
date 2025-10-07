@@ -69,9 +69,9 @@ const assets = await client.queryAssets({
 });
 
 // search assets across of all DEX assets based on search string and query condition
-const matchedAssets = await client.searchAssets({
-  searchString: "USD",
-    condition: [
+const matchedAssets = await client.queryAssets({
+  searchTerms: ["USD"],
+  condition: [
     AssetTag.LiquidityVeryHigh,
     AssetTag.LiquidityHigh, 
   ].join(' | '),
@@ -212,11 +212,3 @@ const operations = await client.getWalletOperations({
   opType: OperationType.Swap, // optional; Only operations with the specified types. All operations if the opType is not specified
 });
 ```
-
-## Roadmap
-
-- and js-dock for each method
-- add more options in configuration
-  - ? interceptors via [ofetch](https://github.com/unjs/ofetch?tab=readme-ov-file#%EF%B8%8F-interceptors)
-  - ? retry via [ofetch](https://github.com/unjs/ofetch?tab=readme-ov-file#%EF%B8%8F-auto-retry)
-  - ? support request abortion via AbortController

@@ -22,6 +22,7 @@ import type { PoolInfoResponse } from "./types/pool";
 import type { RouterInfoResponse } from "./types/router";
 import type { StakingStatsResponse, WalletStakesResponse } from "./types/stake";
 import type { SwapSimulationResponse, SwapStatusResponse } from "./types/swap";
+import type { WalletTxIdResponse } from "./types/transaction";
 
 export type StonApiClientOptions = {
   baseURL?: string;
@@ -60,12 +61,25 @@ export class StonApiClient {
   }
 
   public async queryAssets({
+    searchTerms: searchTerm,
     unconditionalAssets: unconditionalAsset,
     ...query
   }: {
+    /** Condition */
     condition: string;
-    walletAddress?: string;
+    /**
+     * Search terms (address or text)
+     * @examples token names or symbols
+     */
+    searchTerms?: string[];
+    /** Unconditional assets */
     unconditionalAssets?: string[];
+    /** Wallet address */
+    walletAddress?: string;
+    /** Sort parameters in format ":asc|desc" */
+    sortBy?: string[];
+    /** Limit number of pools in response */
+    limit?: number;
   }) {
     return normalizeResponse(
       await this.apiFetch<{ asset_list: AssetInfoV2Response[] }>(
@@ -73,6 +87,7 @@ export class StonApiClient {
           method: "POST",
           query: {
             ...query,
+            searchTerm,
             unconditionalAsset,
           },
         }),
@@ -80,6 +95,9 @@ export class StonApiClient {
     ).assetList;
   }
 
+  /**
+   * @deprecated use `queryAssets` method with `search_term` parameter instead
+   */
   public async searchAssets({
     unconditionalAssets: unconditionalAsset,
     ...query
@@ -223,12 +241,25 @@ export class StonApiClient {
   }
 
   public async queryPools({
+    searchTerms: searchTerm,
     unconditionalAssets: unconditionalAsset,
     ...query
   }: {
+    /** Condition */
     condition: string;
-    walletAddress?: string;
+    /**
+     * Search terms (address or text)
+     * @examples pool address, token names or symbols
+     */
+    searchTerms?: string[];
+    /** Unconditional assets */
     unconditionalAssets?: string[];
+    /** Wallet address */
+    walletAddress?: string;
+    /** Sort parameters in format ":asc|desc" */
+    sortBy?: string[];
+    /** Limit number of pools in response */
+    limit?: number;
     /**
      * If true V2 pools will be present in the response.
      *
@@ -238,15 +269,55 @@ export class StonApiClient {
   }) {
     return normalizeResponse(
       await this.apiFetch<{ pool_list: PoolInfoResponse[] }>(
-        ...normalizeRequest("/v1/pool/query", {
+        ...normalizeRequest("/v1/pools/query", {
           method: "POST",
           query: {
             ...query,
+            searchTerm,
             unconditionalAsset,
           },
         }),
       ),
     ).poolList;
+  }
+
+  public async queryTransactions(
+    query: (
+      | {
+          /** Wallet address */
+          walletAddress: string;
+          /** Query id */
+          queryId: number;
+          extMsgHash?: never;
+        }
+      | {
+          walletAddress?: never;
+          queryId?: never;
+          /** External message hash */
+          extMsgHash: string;
+        }
+    ) & {
+      /**
+       * Min transaction timestamp (can't be earlier than 24 hours from now)
+       *
+       * @default 10 minutes from now
+       */
+      minTxTimestamp?: Date;
+    },
+  ) {
+    return normalizeResponse(
+      await this.apiFetch<WalletTxIdResponse>(
+        ...normalizeRequest("/v1/transactions/query", {
+          method: "GET",
+          query: {
+            ...query,
+            minTxTimestamp: query.minTxTimestamp
+              ? normalizeDate(query.minTxTimestamp)
+              : undefined,
+          },
+        }),
+      ),
+    );
   }
 
   public async simulateSwap({

@@ -46,3 +46,6 @@ export type StakeNft = NonNullable<WalletStakesInfo["nfts"]>[number];
 export type StakingStats = Awaited<
   ReturnType<StonApiClient["getStakingStats"]>
 >;
+export type TxId = NonNullable<
+  Awaited<ReturnType<StonApiClient["queryTransactions"]>>["txId"]
+>;

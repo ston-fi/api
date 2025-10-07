@@ -1,0 +1,5 @@
+verifyDepsBeforeRun: 'install'
+minimumReleaseAge: 2880 # 2 days
+onlyBuiltDependencies:
+- "@biomejs/biome"
+- "lefthook"

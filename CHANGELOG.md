@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.26.0]
+
+### Added
+- `queryTransactions` method was added to help find recent transactions by `walletAddress + queryId` or `extMsgHash`
+
+### Changed
+- `queryAssets` method parameters were extended with new fields:
+  - `searchTerms`
+  - `sortBy`
+  - `limit`
+- `queryPools` method parameters were extended with new fields:
+  - `searchTerms`
+  - `sortBy`
+  - `limit`
+
+### Deprecated
+- `searchAssets` method was deprecated. Consider using the `queryAssets` method instead.
+
+## [0.25.1]
+
+- upgraded pnpm to v10
+- updated dependencies with security vulnerabilities
+
 ## [0.25.0]
 
 ### Added
