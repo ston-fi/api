@@ -1,0 +1,103 @@
+---
+image: ${CI_REGISTRY}/ston-fi/docker/frontend-build:20.10.0_22.17.1-cb9bbe8b
+
+default:
+  tags:
+    - frontend
+
+stages:
+  - test
+  - publish
+
+.npmrc_setup_script: &npmrc_setup_script
+  - echo "@ston-fi:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" >> .npmrc
+  - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+  - echo ".npmrc used:"
+  - cat .npmrc
+
+.pnpm_setup_script: &pnpm_setup_script
+  - *npmrc_setup_script
+  - corepack enable pnpm
+  - pnpm install --frozen-lockfile
+
+.gitlab-npm-registry-publish: &gitlab-npm-registry-publish
+  # extract a few values from package.json
+  - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
+  - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
+  # publish package to npm registry with following options:
+  #   --no-git-check: do not check if the working directory is dirty (version bump with the commit hash for example)
+  #   --access public: make the package public so it can be installed by anyone
+  - |
+      PUBLISH_CMD="pnpm publish --no-git-check --access public"
+
+      # Add tag if specified
+      if [ -n "$NPM_PACKAGE_TAG" ]; then
+        PUBLISH_CMD="$PUBLISH_CMD --tag $NPM_PACKAGE_TAG"
+      fi
+
+      # Run npm pack first to verify package contents
+      if ! npm pack --dry-run; then
+        echo "Error: Package validation failed"
+        exit 1
+      fi
+
+      # Execute publish command
+      if ! $PUBLISH_CMD; then
+        echo "Error: Failed to publish package"
+        exit 1
+      fi
+
+      echo "Successfully published ${NPM_PACKAGE_NAME}@${NPM_PACKAGE_VERSION}"
+
+# automatically run tests on every commit to any branch
+test:test:
+  stage: test
+  before_script:
+    - *pnpm_setup_script
+  script:
+    - pnpm format
+    - pnpm lint
+    - pnpm test
+  rules:
+    - when: always
+
+.publish-job-base: &publish-job-base
+  stage: publish
+  needs:
+    - job: test:test
+  before_script:
+    - *pnpm_setup_script
+
+# automatically publish with current version from package.json file
+# when it is a commit to the main branch with changes in package.json file
+publish:release:
+  <<: *publish-job-base
+  script:
+    # since diff in package.json could be caused not only by version change
+    # we need to check if the version field was changed specifically
+    - |
+      if git diff HEAD^ HEAD -- package.json | grep '"version":'; then
+        echo "Version changed, starting publishing"
+      else
+        echo "Version not changed, skipping publishing"
+        exit 0
+      fi
+    - *gitlab-npm-registry-publish
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - package.json
+
+# manually publish with current version from package.json file appended with commit hash
+# from any branch
+publish:snapshot:
+  <<: *publish-job-base
+  script:
+    # declare NPM_PACKAGE_TAG variable to be used in the publish command to prevent npm 
+    # from adding the "latest" tag to the snapshot build
+    - NPM_PACKAGE_TAG=snapshot
+    # append commit hash to the version field in package.json
+    - npm version $(node -p "require('./package.json').version")-$CI_COMMIT_SHORT_SHA --no-git-tag-version
+    - *gitlab-npm-registry-publish
+  rules:
+    - when: manual

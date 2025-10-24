@@ -60,11 +60,7 @@ export class StonApiClient {
     ).assetList;
   }
 
-  public async queryAssets({
-    searchTerms: searchTerm,
-    unconditionalAssets: unconditionalAsset,
-    ...query
-  }: {
+  public async queryAssets(body: {
     /** Condition */
     condition: string;
     /**
@@ -85,40 +81,30 @@ export class StonApiClient {
       await this.apiFetch<{ asset_list: AssetInfoV2Response[] }>(
         ...normalizeRequest("/v1/assets/query", {
           method: "POST",
-          query: {
-            ...query,
-            searchTerm,
-            unconditionalAsset,
-          },
+          body,
         }),
       ),
     ).assetList;
   }
 
   /**
-   * @deprecated use `queryAssets` method with `search_term` parameter instead
+   * @deprecated use `queryAssets` method with `searchTerms` parameter instead
    */
-  public async searchAssets({
-    unconditionalAssets: unconditionalAsset,
-    ...query
-  }: {
+  public async searchAssets(query: {
     searchString: string;
+    /** Condition */
     condition: string;
+    /** Wallet address */
     walletAddress?: string;
+    /** Unconditional assets */
     unconditionalAssets?: string[];
+    /** Limit number of pools in response */
     limit?: number;
   }) {
-    return normalizeResponse(
-      await this.apiFetch<{ asset_list: AssetInfoV2Response[] }>(
-        ...normalizeRequest("/v1/assets/search", {
-          method: "POST",
-          query: {
-            ...query,
-            unconditionalAsset,
-          },
-        }),
-      ),
-    ).assetList;
+    return this.queryAssets({
+      ...query,
+      searchTerms: [query.searchString],
+    });
   }
 
   public async getFarm(farmAddress: string) {

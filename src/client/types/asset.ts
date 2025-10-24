@@ -50,7 +50,7 @@ export type AssetInfoResponse = {
   popularity_index?: number;
   tags: AssetTag[];
   custom_payload_api_uri?: string;
-  extensions?: string[];
+  extensions?: Array<"custom_payload" | (string & {})>;
 };
 
 type AssetV2Meta = {

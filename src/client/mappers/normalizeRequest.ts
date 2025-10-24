@@ -36,5 +36,9 @@ export function normalizeRequest<T extends FetchOptions>(
     options.query = decamelizeKeys(options.query);
   }
 
+  if (options?.body && typeof options.body === "object") {
+    options.body = decamelizeKeys(options.body as Record<string, unknown>);
+  }
+
   return [pathWithParams, options] as const;
 }

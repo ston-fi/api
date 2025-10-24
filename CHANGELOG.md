@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.27.1]
+
+### Changed
+  - `queryAssets` method parameters now use POST method body instead of search parameters
+  - `searchAssets` method now uses `queryAssets` under the hood
+  - the package manager was changed to pnpm@10, and workspace settings were configured to prevent installation of recently published packages. This change, along with explicitly fixed dependency versions, should minimize the risk of publishing packages that depend on a recently published newer version of a dependency
+  - the build tool was changed from [tsup](https://tsup.egoist.dev/) to [tsdown](https://tsdown.dev/)
+
 ## [0.26.0]
 
 ### Added

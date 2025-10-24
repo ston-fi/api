@@ -1,5 +1,10 @@
-verifyDepsBeforeRun: 'install'
-minimumReleaseAge: 2880 # 2 days
+minimumReleaseAge: 2880
+minimumReleaseAgeExclude:
+- '@ston-fi/*'
+
 onlyBuiltDependencies:
-- "@biomejs/biome"
-- "lefthook"
+- '@biomejs/biome'
+- '@ston-fi/*'
+- 'lefthook'
+
+verifyDepsBeforeRun: 'install'
