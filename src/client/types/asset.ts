@@ -20,6 +20,7 @@ export const AssetTag = {
   WalletHasBalance: "asset:wallet_has_balance",
   WalletHasLiquidityInPool: "asset:wallet_has_liquidity_in_pool",
   Taxable: "asset:taxable",
+  Scaled: "asset:scaled",
 
   /** @deprecated use LiquidityNo instead */
   NoLiquidity: "no_liquidity",
@@ -50,7 +51,8 @@ export type AssetInfoResponse = {
   popularity_index?: number;
   tags: AssetTag[];
   custom_payload_api_uri?: string;
-  extensions?: Array<"custom_payload" | (string & {})>;
+  scale?: string;
+  extensions?: Array<"custom_payload" | "scaled-ui" | (string & {})>;
 };
 
 type AssetV2Meta = {
@@ -71,5 +73,6 @@ export type AssetInfoV2Response = {
   popularity_index?: number;
   tags?: AssetTag[];
   wallet_address?: string;
-  extensions?: string[];
+  scale?: string;
+  extensions?: Array<"custom_payload" | "scaled-ui" | (string & {})>;
 };

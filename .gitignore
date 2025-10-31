@@ -22,5 +22,3 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-
-.husky

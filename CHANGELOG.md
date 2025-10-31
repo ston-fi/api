@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.28.0]
+
+### Added
+- `AssetInfo` & `AssetInfoV2` types was extended with
+  - new optional field `scale`
+  - new optional `scaled-ui` extensions list value
+- new `AssetTag.Scaled` was added
+
 ## [0.27.1]
 
 ### Changed
@@ -109,7 +117,7 @@
 
 ### Removed
 
-- `FarmInfoResponse` field `reward_token_address` was removed. Since v3 farms can distribute multiple rewards, use the `rewards` field instead to access information about each farm reward pool 
+- `FarmInfoResponse` field `reward_token_address` was removed. Since v3 farms can distribute multiple rewards, use the `rewards` field instead to access information about each farm reward pool
 
 ## [0.21.0]
 
