@@ -1,3 +1,5 @@
+import type { RouterInfoResponse } from "./router";
+
 export const LiquidityProvisionType = {
   /**
    * Create new pool (requires both token amounts)
@@ -59,7 +61,9 @@ export type LiquidityProvisionSimulationQuery = {
 
 export type LiquidityProvisionSimulationResponse = {
   provision_type: LiquidityProvisionType;
+  /** you can use router.address field instead */
   router_address: string;
+  router: RouterInfoResponse;
   pool_address: string;
   token_a: string;
   token_b: string;

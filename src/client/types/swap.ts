@@ -1,4 +1,5 @@
 import type { GasParams } from "./gas";
+import type { RouterInfoResponse } from "./router";
 
 export type SwapSimulationResponse = {
   ask_address: string;
@@ -13,7 +14,9 @@ export type SwapSimulationResponse = {
   offer_units: string;
   pool_address: string;
   price_impact: string;
+  /** you can use router.address field instead */
   router_address: string;
+  router: RouterInfoResponse;
   slippage_tolerance: string;
   swap_rate: string;
   recommended_slippage_tolerance: string;

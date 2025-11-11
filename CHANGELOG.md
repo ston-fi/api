@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.29.0]
+
+### Added
+
+- `SwapSimulationResponse` and `LiquidityProvisionSimulationResponse` types were extended with the router field. Now you are receiving the whole routerInfo obj right inside of the response which means you no longer need to make an additional call to get the routerInfo by `*SimulationResponse.router_address`. Now you can simply pass the `*SimulationResponse.router` directly to the `dexFactory` util function from the [@ston-fi/sdk](https://github.com/ston-fi/sdk/tree/main/packages/sdk) and get the contracts of the right versions for a given router
+
+```ts
+import { StonApiClient } from "@ston-fi/api";
+import { dexFactory } from "@ston-fi/sdk";
+
+const stonApiClient = new StonApiClient();
+
+const swapSimulation = await stonApiClient.simulateSwap({
+  offerAddress: "EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM9c", // TON
+  offerUnits: "1000000000", // 1 TON
+  askAddress: "EQA2kCVNwVsil2EM2mB0SkXytxCqQjS4mttjDpnXmwG9T6bO", // STON
+  slippageTolerance: "0.005", // 0.5%
+});
+
+const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
+```
+
 ## [0.28.0]
 
 ### Added
