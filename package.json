@@ -1,6 +1,6 @@
 {
   "name": "@ston-fi/api",
-  "version": "0.29.0",
+  "version": "0.30.0",
   "description": "Typescript client for Ston.fi Http API",
   "license": "MIT",
   "homepage": "https://github.com/ston-fi/api#readme",
@@ -36,7 +36,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "cleanup": "rm -rf coverage dist node_modules build-report-*",
+    "cleanup": "rm -rf coverage dist node_modules build-report-*.html",
     "dev": "tsdown --sourcemap --watch ./src",
     "build": "tsdown",
     "format": "pnpm run /^format:.*/",
@@ -44,7 +44,8 @@
     "lint": "pnpm run /^lint:.*/",
     "lint:tsc": "tsc --noEmit --pretty",
     "lint:biome": "biome check",
-    "test": "vitest",
+    "test": "pnpm run /^test:.*/",
+    "test:unit": "vitest",
     "prepublishOnly": "pnpm run lint && pnpm run test --run && pnpm run build --attw --publint"
   },
   "dependencies": {
@@ -53,11 +54,11 @@
     "ofetch": "1.4.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.4",
-    "lefthook": "2.0.2",
+    "@biomejs/biome": "2.3.11",
+    "lefthook": "2.0.15",
     "rollup-plugin-visualizer": "6.0.5",
-    "tsdown": "0.16.1",
+    "tsdown": "0.19.0",
     "typescript": "5.9.3",
-    "vitest": "4.0.8"
+    "vitest": "4.0.17"
   }
 }

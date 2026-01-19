@@ -2,6 +2,7 @@ export const AssetKind = {
   Ton: "Ton",
   Wton: "Wton",
   Jetton: "Jetton",
+  NotAnAsset: "NotAnAsset",
 } as const;
 
 export type AssetKind = keyof typeof AssetKind;
@@ -21,6 +22,7 @@ export const AssetTag = {
   WalletHasLiquidityInPool: "asset:wallet_has_liquidity_in_pool",
   Taxable: "asset:taxable",
   Scaled: "asset:scaled",
+  NonSearchable: "asset:non_searchable",
 
   /** @deprecated use LiquidityNo instead */
   NoLiquidity: "no_liquidity",

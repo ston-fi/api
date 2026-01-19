@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.30.0]
+
+### Added
+
+- new `AssetKind.NotAnAsset` enum value
+- new `AssetTag.NonSearchable` enum value
+
+- upgraded dev dependencies
+
 ## [0.29.0]
 
 ### Added
