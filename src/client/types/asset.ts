@@ -23,6 +23,10 @@ export const AssetTag = {
   Taxable: "asset:taxable",
   Scaled: "asset:scaled",
   NonSearchable: "asset:non_searchable",
+  DmcaComplaint: "asset:dmca_complaint",
+  Honeypot: "asset:honeypot",
+  Suspicious: "asset:suspicious",
+  Fake: "asset:fake",
 
   /** @deprecated use LiquidityNo instead */
   NoLiquidity: "no_liquidity",

@@ -3,8 +3,7 @@
 pre-commit:
   parallel: true
   commands:
-    format:biome:
-      # https://biomejs.dev/recipes/git-hooks/#lefthook
-      glob: "*"
-      run: npx @biomejs/biome format --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+    format:oxfmt:
+      # https://oxc.rs/docs/guide/usage/formatter/integration.html#pre-commit-hook
+      run: npx oxfmt --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.31.0]
+
+### Added
+
+- new `AssetKind.DmcaComplaint` enum value
+- new `AssetKind.Honeypot` enum value
+- new `AssetKind.Suspicious` enum value
+- new `AssetKind.Fake` enum value
+
+- upgraded dev dependencies
+- change repo toolchain from biome to oxc
+
 ## [0.30.0]
 
 ### Added
@@ -34,6 +46,7 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
 ## [0.28.0]
 
 ### Added
+
 - `AssetInfo` & `AssetInfoV2` types was extended with
   - new optional field `scale`
   - new optional `scaled-ui` extensions list value
@@ -42,17 +55,20 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
 ## [0.27.1]
 
 ### Changed
-  - `queryAssets` method parameters now use POST method body instead of search parameters
-  - `searchAssets` method now uses `queryAssets` under the hood
-  - the package manager was changed to pnpm@10, and workspace settings were configured to prevent installation of recently published packages. This change, along with explicitly fixed dependency versions, should minimize the risk of publishing packages that depend on a recently published newer version of a dependency
-  - the build tool was changed from [tsup](https://tsup.egoist.dev/) to [tsdown](https://tsdown.dev/)
+
+- `queryAssets` method parameters now use POST method body instead of search parameters
+- `searchAssets` method now uses `queryAssets` under the hood
+- the package manager was changed to pnpm@10, and workspace settings were configured to prevent installation of recently published packages. This change, along with explicitly fixed dependency versions, should minimize the risk of publishing packages that depend on a recently published newer version of a dependency
+- the build tool was changed from [tsup](https://tsup.egoist.dev/) to [tsdown](https://tsdown.dev/)
 
 ## [0.26.0]
 
 ### Added
+
 - `queryTransactions` method was added to help find recent transactions by `walletAddress + queryId` or `extMsgHash`
 
 ### Changed
+
 - `queryAssets` method parameters were extended with new fields:
   - `searchTerms`
   - `sortBy`
@@ -63,6 +79,7 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
   - `limit`
 
 ### Deprecated
+
 - `searchAssets` method was deprecated. Consider using the `queryAssets` method instead.
 
 ## [0.25.1]
@@ -73,13 +90,15 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
 ## [0.25.0]
 
 ### Added
-  - `StonApiClient.getWalletStakes` method
-  - `StonApiClient.getStakingStats` method
+
+- `StonApiClient.getWalletStakes` method
+- `StonApiClient.getStakingStats` method
 
 ### Changed
-  - updated package exports declaration
-  - updated dev dependencies
-  - dropped `baseURL` search params carrying to the API calls
+
+- updated package exports declaration
+- updated dev dependencies
+- dropped `baseURL` search params carrying to the API calls
 
 ## [0.24.0]
 
@@ -108,6 +127,7 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
 ## [0.23.0]
 
 ### Added
+
 - `StonApiClient.getWalletVaultsFee` method
 - `StonApiClient.getAssetsFeeStats` method
 - `StonApiClient.getWithdrawalsFeeStats` method
@@ -183,6 +203,7 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
 ## [0.16.0]
 
 ### Added
+
 - asset info that returns from asset-related methods was extended with the `popularityIndex` filed. This index is calculated based on the TVL of the pools with this asset on DEX. It could be used to be one of the ways to sort assets
 
 ## [0.15.0]
@@ -193,6 +214,7 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
 - package build tool was changed from [vite](https://github.com/vitejs/vite) to [tsup](https://github.com/egoist/tsup) for better type declaration. Now we are successfully passing the [arethetypeswrong](https://github.com/arethetypeswrong/arethetypeswrong.github.io) checks
 
 ### Added
+
 - added missed package description fields to the `package.json` file. Now we are successfully passing the [publint](https://github.com/bluwy/publint) checks
 
 ### Fixed
@@ -229,6 +251,7 @@ const { Router, Pool, LpAccount, pTON } = dexFactory(swapSimulation.router);
 ## [0.12.0]
 
 ### Added
+
 - The `AssetInfo` structure was extended with `extensions` & `custom_payload_api_uri` fields (fields for Mintless Jetton's)
 - The `AssetInfoV2Response` structure was extended with `extensions` & `meta.custom_payload_api_uri` fields (fields for Mintless Jetton's)
 - `StonApiClient.getRouters` method

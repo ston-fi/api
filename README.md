@@ -1,11 +1,15 @@
-<div align="center">
- <h1>STON.fi API</h1>
+<div align="center" style="margin-bottom: 20px">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="https://static.ston.fi/branbook/ston/logo/black.svg" >
+    <source media="(prefers-color-scheme: dark)" srcset="https://static.ston.fi/branbook/ston/logo/white.svg" >
+    <img alt="Omniston svg" height="100px" src="https://static.ston.fi/branbook/ston/logo/black.svg" >
+  </picture>
 </div>
 
 [![License](https://img.shields.io/npm/l/@ston-fi/api)](https://img.shields.io/npm/l/@ston-fi/api)
 [![npm version](https://img.shields.io/npm/v/@ston-fi/api/latest.svg)](https://www.npmjs.com/package/@ston-fi/api/v/latest)
 
-TypeScript wrapper on top of the [Ston.fi Http API](https://api.ston.fi/swagger-ui)
+`@ston-fi/api` — TypeScript client for the [Ston.fi HTTP API](https://api.ston.fi/redoc)
 
 ## Installation
 
@@ -31,13 +35,13 @@ pnpm install @ston-fi/api
 
 Zero config required, you can just create an instance
 
-Optional configuration are also possible by providing an object of type `StonApiClientOptions` to the constructor
-
 ```ts
-import { StonApiClient } from '@ston-fi/api';
+import { StonApiClient } from "@ston-fi/api";
 
 const client = new StonApiClient();
 ```
+
+Optional configuration are also possible by providing an object of type `StonApiClientOptions` to the constructor
 
 ## Usage
 
@@ -48,7 +52,7 @@ const client = new StonApiClient();
 const routers = await client.getRouters();
 
 // get router by address
-const router = await client.getRouter('EQ...');
+const router = await client.getRouter("EQ...");
 
 // * assets
 
@@ -56,7 +60,7 @@ const router = await client.getRouter('EQ...');
 const assets = await client.getAssets();
 
 // get asset info by it address
-const asset = await client.getAsset('EQ...');
+const asset = await client.getAsset("EQ...");
 
 // get list of all DEX assets based on query condition
 const assets = await client.queryAssets({
@@ -64,25 +68,25 @@ const assets = await client.queryAssets({
     AssetTag.Essential,
     AssetTag.Popular,
     AssetTag.WalletHasBalance,
-  ].join(' | '),
-  walletAddress: 'UQ...',
+  ].join(" | "),
+  walletAddress: "UQ...",
 });
 
 // search assets across of all DEX assets based on search string and query condition
 const matchedAssets = await client.queryAssets({
   searchTerms: ["USD"],
-  condition: [
-    AssetTag.LiquidityVeryHigh,
-    AssetTag.LiquidityHigh, 
-  ].join(' | '),
+  condition: [AssetTag.LiquidityVeryHigh, AssetTag.LiquidityHigh].join(" | "),
   walletAddress: "UQ...",
 });
 
 // get list of all DEX assets with balances for a given wallet
-const walletAssets = await client.getWalletAssets('UQ...');
+const walletAssets = await client.getWalletAssets("UQ...");
 
 // get asset info by it address with balance for a given wallet
-const walletAsset = await client.getWalletAsset({ assetAddress: 'EQ...', walletAddress: 'UQ...' });
+const walletAsset = await client.getWalletAsset({
+  assetAddress: "EQ...",
+  walletAddress: "UQ...",
+});
 
 // * pools
 
@@ -92,7 +96,7 @@ const pools = await client.getPools();
 // get list of all DEX pools based on query condition
 const pools = await client.queryPools({
   condition: `${AssetTag.LiquidityVeryHigh} | ${AssetTag.LiquidityHigh} | ${AssetTag.Popular}`,
-  walletAddress: 'UQ...',
+  walletAddress: "UQ...",
 });
 
 // get list of pools with the given asset pair
@@ -102,13 +106,16 @@ const pools = await client.getPoolsByAssetPair({
 });
 
 // get pool info by it address
-const pool = await client.getPool('EQ...');
+const pool = await client.getPool("EQ...");
 
 // get list of all DEX pools with balances for a given wallet
-const walletPools = await client.getWalletPools('UQ...');
+const walletPools = await client.getWalletPools("UQ...");
 
 // get pool info by it address with balance for a given wallet
-const walletPool = await client.getWalletPool({ poolAddress: 'EQ...', walletAddress: 'UQ...' });
+const walletPool = await client.getWalletPool({
+  poolAddress: "EQ...",
+  walletAddress: "UQ...",
+});
 
 // * farms
 
@@ -116,16 +123,19 @@ const walletPool = await client.getWalletPool({ poolAddress: 'EQ...', walletAddr
 const farms = await client.getFarms();
 
 // get farm info by it address
-const farm = await client.getFarm('EQ...');
+const farm = await client.getFarm("EQ...");
 
 // get list of all DEX farms with balances for a given wallet
-const walletFarms = await client.getWalletFarms('UQ...');
+const walletFarms = await client.getWalletFarms("UQ...");
 
 // get farm info by it address with balance for a given wallet
-const walletFarm = await client.getWalletFarm({ farmAddress: 'EQ...', walletAddress: 'UQ...' });
+const walletFarm = await client.getWalletFarm({
+  farmAddress: "EQ...",
+  walletAddress: "UQ...",
+});
 
 // get list of all DEX farms for a given pool
-const poolFarms = await client.getFarmsByPool('EQ...');
+const poolFarms = await client.getFarmsByPool("EQ...");
 
 // * swaps
 
@@ -133,65 +143,74 @@ const poolFarms = await client.getFarmsByPool('EQ...');
 const pairs = await client.getSwapPairs();
 
 // simulate direct swap between two assets (sell asset for another)
-const swapDirectSimulation = await client.simulateSwap({ /** */ });
+const swapDirectSimulation = await client.simulateSwap({
+  /** */
+});
 
 // simulate reverse swap between two assets (buy asset for another)
-const swapReverseSimulation = await client.simulateReverseSwap({ /** */ });
+const swapReverseSimulation = await client.simulateReverseSwap({
+  /** */
+});
 
 // get swap status by it id and some additional info (e.g. wallet address, etc.)
-const swapStatus = await client.getSwapStatus({ /** */ });
+const swapStatus = await client.getSwapStatus({
+  /** */
+});
 
 // * liquidity provision
 
 // Simulate new pool creation with a ratio based on provided token amounts
 const initialLiquidityProvision = await client.simulateLiquidityProvision({
   provisionType: LiquidityProvisionType.Initial,
-  slippageTolerance: '0.001',
-  tokenA: 'EQ...',
-  tokenB: 'EQ...',
-  tokenAUnits: '1000',
-  tokenBUnits: '1000',
+  slippageTolerance: "0.001",
+  tokenA: "EQ...",
+  tokenB: "EQ...",
+  tokenAUnits: "1000",
+  tokenBUnits: "1000",
 });
 
 // Simulate adding liquidity to an existing pool at the current pool ratio
 // Only one amount is required; Corresponding second amount will be calculated during the simulation
 const balancedLiquidityProvision = await client.simulateLiquidityProvision({
   provisionType: LiquidityProvisionType.Balanced,
-  poolAddress: 'EQ...',
-  slippageTolerance: '0.001',
-  tokenA: 'EQ...',
-  tokenB: 'EQ...',
-  tokenAUnits: '1000',
+  poolAddress: "EQ...",
+  slippageTolerance: "0.001",
+  tokenA: "EQ...",
+  tokenB: "EQ...",
+  tokenAUnits: "1000",
 });
 
 // Simulate adding liquidity with an arbitrary ratio based on provided token amounts
 // During provisioning, your funds will be swapped to match the required pool ratio
 const arbitraryLiquidityProvision = await client.simulateLiquidityProvision({
   provisionType: LiquidityProvisionType.Arbitrary,
-  poolAddress: 'EQ...',
-  slippageTolerance: '0.001',
-  tokenA: 'EQ...',
-  tokenB: 'EQ...',
-  tokenAUnits: '1000',
-  tokenBUnits: '2000',
+  poolAddress: "EQ...",
+  slippageTolerance: "0.001",
+  tokenA: "EQ...",
+  tokenB: "EQ...",
+  tokenAUnits: "1000",
+  tokenBUnits: "2000",
 });
 
 // Simulate single side adding liquidity
 // Is a special case of arbitrary liquidity provision when the ratio is 100 to 0
-const arbitrarySinglesideLiquidityProvision = await client.simulateLiquidityProvision({
-  provisionType: LiquidityProvisionType.Arbitrary,
-  tokenA: 'EQ...',
-  tokenB: 'EQ...',
-  poolAddress: 'EQ...',
-  slippageTolerance: '0.001',
-  tokenAUnits: '1000',
-  tokenBUnits: '0', // require explicit zero value
-});
+const arbitrarySinglesideLiquidityProvision =
+  await client.simulateLiquidityProvision({
+    provisionType: LiquidityProvisionType.Arbitrary,
+    tokenA: "EQ...",
+    tokenB: "EQ...",
+    poolAddress: "EQ...",
+    slippageTolerance: "0.001",
+    tokenAUnits: "1000",
+    tokenBUnits: "0", // require explicit zero value
+  });
 
 // * stake
 
 // get list of ALL wallet stake NFT's & stakes summary
-const walletStakes = await client.getWalletStakes({ walletAddress: 'UQAQnxLqlX2B6w4jQzzzPWA8eyWZVZBz6Y0D_8noARLOaEAn' });
+const walletStakes = await client.getWalletStakes({
+  walletAddress: "UQAQnxLqlX2B6w4jQzzzPWA8eyWZVZBz6Y0D_8noARLOaEAn",
+});
 
 // get global stats about the Ston.fi staking
 const stakingStats = await client.getStakingStats();
@@ -200,15 +219,15 @@ const stakingStats = await client.getStakingStats();
 
 // get list of ALL operations during specified period of time on the platform
 const operations = await client.getOperations({
-  since: new Date('2024-08-05T12:00:00'),
-  until: new Date('2024-08-06T21:00:00')
+  since: new Date("2024-08-05T12:00:00"),
+  until: new Date("2024-08-06T21:00:00"),
 });
 
 // get list of operations during specified period of time for a given wallet
 const operations = await client.getWalletOperations({
-  since: new Date('2024-06-01T12:00:00'),
-  until: new Date('2024-08-06T21:00:00'),
-  walletAddress: 'UQ...',
+  since: new Date("2024-06-01T12:00:00"),
+  until: new Date("2024-08-06T21:00:00"),
+  walletAddress: "UQ...",
   opType: OperationType.Swap, // optional; Only operations with the specified types. All operations if the opType is not specified
 });
 ```

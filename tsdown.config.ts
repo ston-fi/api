@@ -8,6 +8,8 @@ export default defineConfig((_) => {
     noExternal: ["camelcase-keys", "decamelize-keys"],
     platform: "neutral",
     plugins: [],
+    attw: true,
+    publint: true,
   } satisfies UserConfig;
 
   return [

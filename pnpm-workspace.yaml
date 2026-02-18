@@ -1,10 +1,16 @@
-minimumReleaseAge: 2880
-minimumReleaseAgeExclude:
-- '@ston-fi/*'
+# If dependencies are missing or out-of-date
+# run `pnpm install` automatically before executing script
+# Allow to never run `pnpm install` manually
+verifyDepsBeforeRun: "install"
 
+# Starting from pnpm@10 the dependency lifecycle scripts will not be run
+# after installation by default.
+# Only listed packages will have their lifecycle scripts run.
+# see https://pnpm.io/settings#onlybuiltdependencies
 onlyBuiltDependencies:
-- '@biomejs/biome'
-- '@ston-fi/*'
-- 'lefthook'
+  - "lefthook"
 
-verifyDepsBeforeRun: 'install'
+# To reduce the risk of installing compromised packages
+# we only allow installing packages that have been released
+# at least 2 days ago (48 hours = 2880 minutes).
+minimumReleaseAge: 2880
