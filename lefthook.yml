@@ -4,6 +4,5 @@ pre-commit:
   parallel: true
   commands:
     format:oxfmt:
-      # https://oxc.rs/docs/guide/usage/formatter/integration.html#pre-commit-hook
-      run: npx oxfmt --no-error-on-unmatched-pattern {staged_files}
-      stage_fixed: true
+      # https://oxc.rs/docs/guide/usage/formatter/ci.html#pre-commit-hook
+      run: npx oxfmt --no-error-on-unmatched-pattern --write {staged_files} && git add {staged_files}

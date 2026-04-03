@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "experimentalSortPackageJson": false,
-  "experimentalSortImports": {},
+  // enable import sorting (not enabled by default yet)
+  "sortImports": true,
   "printWidth": 80
 }

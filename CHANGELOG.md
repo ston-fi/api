@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.32.0] 03.04.2026
+
+This release focuses on package usage DX and does not introduce any API changes.
+
+### Changed
+
+- dropped the `preinstall` script that enforced `pnpm` usage, which caused issues in consumer projects
+- migrated to [TypeScript 6](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0)
+- upgraded devDependencies
+- updated scripts
+
 ## [0.31.0]
 
 ### Added

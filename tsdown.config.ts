@@ -1,9 +1,8 @@
-import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig, type UserConfig } from "tsdown";
 
-export default defineConfig((_) => {
+export default defineConfig(() => {
   const sharedOptions = {
-    entry: ["src/*", "!src/**/*.test.ts"],
+    entry: ["src/index.ts"],
     dts: true,
     noExternal: ["camelcase-keys", "decamelize-keys"],
     platform: "neutral",
@@ -15,25 +14,13 @@ export default defineConfig((_) => {
   return [
     {
       ...sharedOptions,
-      format: "esm",
+      format: "esm" as const,
       outDir: "dist/esm",
-      plugins: [
-        ...sharedOptions.plugins,
-        visualizer({
-          filename: `build-report-esm.html`,
-        }),
-      ],
     },
     {
       ...sharedOptions,
-      format: "cjs",
+      format: "cjs" as const,
       outDir: "dist/cjs",
-      plugins: [
-        ...sharedOptions.plugins,
-        visualizer({
-          filename: `build-report-cjs.html`,
-        }),
-      ],
     },
   ];
 });
