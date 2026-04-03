@@ -6,7 +6,7 @@
   </picture>
 </div>
 
-[![License](https://img.shields.io/npm/l/@ston-fi/api)](https://img.shields.io/npm/l/@ston-fi/api)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/@ston-fi/api/latest.svg)](https://www.npmjs.com/package/@ston-fi/api/v/latest)
 
 `@ston-fi/api` — TypeScript client for the [Ston.fi HTTP API](https://api.ston.fi/redoc)
