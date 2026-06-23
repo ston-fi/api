@@ -4,6 +4,11 @@
   "description": "Typescript client for Ston.fi Http API",
   "homepage": "https://github.com/ston-fi/api#readme",
   "license": "MIT",
+  "contributors": [
+    "Egor Guscha @pxbuffer",
+    "Pavel Rakhmanov <p.rakhmanov@ston.fi>",
+    "Psevkin Andrey <a.psevkin@ston.fi>"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ston-fi/api.git"
