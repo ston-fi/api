@@ -41,7 +41,7 @@
   "scripts": {
     "dev": "tsdown --sourcemap --watch ./src",
     "build": "tsdown",
-    "clean": "rm -rf coverage dist node_modules build-report-*.html",
+    "clean": "rm -rf coverage dist node_modules .vitest build-report-*.html",
     "format": "oxfmt .",
     "lint": "oxlint .",
     "typecheck": "tsc --noEmit",
@@ -61,7 +61,7 @@
     "publint": "0.3.18",
     "tsdown": "0.21.7",
     "typescript": "6.0.2",
-    "vitest": "4.0.17"
+    "vitest": "5.0.4"
   },
   "packageManager": "pnpm@12.12.0"
 }
