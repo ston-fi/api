@@ -55,9 +55,9 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
-    "lefthook": "2.1.4",
-    "oxfmt": "0.43.0",
-    "oxlint": "1.58.0",
+    "lefthook": "2.2.1",
+    "oxfmt": "0.72.0",
+    "oxlint": "1.87.0",
     "publint": "0.3.18",
     "tsdown": "0.21.7",
     "typescript": "6.0.2",

@@ -1,8 +1,5 @@
-# Lefthook configuration guide: https://lefthook.dev/configuration
-
 pre-commit:
-  parallel: true
   commands:
-    format:oxfmt:
-      # https://oxc.rs/docs/guide/usage/formatter/ci.html#pre-commit-hook
-      run: npx oxfmt --no-error-on-unmatched-pattern --write {staged_files} && git add {staged_files}
+    format:
+      run: pnpm exec oxfmt --write --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true

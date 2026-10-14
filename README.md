@@ -143,19 +143,13 @@ const poolFarms = await client.getFarmsByPool("EQ...");
 const pairs = await client.getSwapPairs();
 
 // simulate direct swap between two assets (sell asset for another)
-const swapDirectSimulation = await client.simulateSwap({
-  /** */
-});
+const swapDirectSimulation = await client.simulateSwap({/** */});
 
 // simulate reverse swap between two assets (buy asset for another)
-const swapReverseSimulation = await client.simulateReverseSwap({
-  /** */
-});
+const swapReverseSimulation = await client.simulateReverseSwap({/** */});
 
 // get swap status by it id and some additional info (e.g. wallet address, etc.)
-const swapStatus = await client.getSwapStatus({
-  /** */
-});
+const swapStatus = await client.getSwapStatus({/** */});
 
 // * liquidity provision
 
