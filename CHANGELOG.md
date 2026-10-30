@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.33.0] 30.10.2026
+
+### Added
+
+- new `AssetTag.NoPools` enum value
+- new `PoolTag` enum
+- `AssetInfo` type was extended with the `taxable` field
+- `AssetInfoV2` type was extended with the `nativeApr` field
+- `PoolInfo` type was extended with `tags`, `popularityIndex` and `underlyingApr` fields
+- `AssetFeeStat` type was extended with the `withdrawnUsd` field
+- `getAssetsFeeStats` response was extended with the `totalWithdrawnUsd` field
+
+### Changed
+
+- `queryTransactions` method now accepts `queryId` as a `string` instead of a `number` to prevent precision loss for large query IDs
+
+  If you pass `queryId` as a number, use the original string:
+
+  ```diff
+  const queryId = "6083770389372067676";
+
+  await client.queryTransactions({
+    walletAddress,
+  - queryId: Number(queryId),
+  + queryId,
+  });
+  ```
+
+- `AssetInfo` & `AssetInfoV2` tags now accept `AssetTag` values or strings
+
 ## [0.32.0] 03.04.2026
 
 This release focuses on package usage DX and does not introduce any API changes.

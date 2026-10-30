@@ -4,6 +4,7 @@ export { StonApiClient, type StonApiClientOptions } from "./client/apiClient";
 export { AssetKind, AssetTag } from "./client/types/asset";
 export { LiquidityProvisionType } from "./client/types/liquidityProvision";
 export { OperationType } from "./client/types/operation";
+export { PoolTag } from "./client/types/pool";
 export { StakeNftStatus } from "./client/types/stake";
 
 export type AssetInfo = Awaited<ReturnType<StonApiClient["getAssets"]>>[number];

@@ -8,11 +8,12 @@ export const AssetKind = {
 export type AssetKind = keyof typeof AssetKind;
 
 export const AssetTag = {
-  Essential: "asset:essential",
   Blacklisted: "asset:blacklisted",
+  Suspicious: "asset:suspicious",
   Deprecated: "asset:deprecated",
   DefaultSymbol: "asset:default_symbol",
   LiquidityNo: "asset:liquidity:no",
+  NoPools: "asset:no_pools",
   LiquidityMedium: "asset:liquidity:medium",
   LiquidityLow: "asset:liquidity:low",
   LiquidityHigh: "asset:liquidity:high",
@@ -21,12 +22,12 @@ export const AssetTag = {
   WalletHasBalance: "asset:wallet_has_balance",
   WalletHasLiquidityInPool: "asset:wallet_has_liquidity_in_pool",
   Taxable: "asset:taxable",
+  Fake: "asset:fake",
+  Honeypot: "asset:honeypot",
+  DmcaComplaint: "asset:dmca_complaint",
+  Essential: "asset:essential",
   Scaled: "asset:scaled",
   NonSearchable: "asset:non_searchable",
-  DmcaComplaint: "asset:dmca_complaint",
-  Honeypot: "asset:honeypot",
-  Suspicious: "asset:suspicious",
-  Fake: "asset:fake",
 
   /** @deprecated use LiquidityNo instead */
   NoLiquidity: "no_liquidity",
@@ -52,10 +53,11 @@ export type AssetInfoResponse = {
   kind: AssetKind;
   priority: number;
   symbol: string;
+  taxable: boolean;
   third_party_price_usd?: string | null;
   wallet_address?: string | null;
   popularity_index?: number;
-  tags: AssetTag[];
+  tags: Array<AssetTag | (string & {})>;
   custom_payload_api_uri?: string;
   scale?: string;
   extensions?: Array<"custom_payload" | "scaled-ui" | (string & {})>;
@@ -75,9 +77,10 @@ export type AssetInfoV2Response = {
   balance?: string;
   dex_price_usd?: string;
   meta?: AssetV2Meta;
+  native_apr?: number;
   pair_priority?: number;
   popularity_index?: number;
-  tags?: AssetTag[];
+  tags?: Array<AssetTag | (string & {})>;
   wallet_address?: string;
   scale?: string;
   extensions?: Array<"custom_payload" | "scaled-ui" | (string & {})>;

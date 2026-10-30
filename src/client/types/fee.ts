@@ -3,6 +3,7 @@ type AssetFeeStat = {
   accrued: string;
   accrued_usd: string;
   withdrawn: string;
+  withdrawn_usd?: string;
 };
 
 export type AssetsFeeStatsResponse = {
@@ -10,6 +11,7 @@ export type AssetsFeeStatsResponse = {
   since: string;
   until: string;
   total_accrued_usd: string;
+  total_withdrawn_usd?: string;
 };
 
 export type WithdrawalFeeStat = {

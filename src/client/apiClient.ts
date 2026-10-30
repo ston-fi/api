@@ -271,7 +271,7 @@ export class StonApiClient {
           /** Wallet address */
           walletAddress: string;
           /** Query id */
-          queryId: number;
+          queryId: string;
           extMsgHash?: never;
         }
       | {

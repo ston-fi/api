@@ -1,6 +1,6 @@
 {
   "name": "@ston-fi/api",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "description": "Typescript client for Ston.fi Http API",
   "homepage": "https://github.com/ston-fi/api#readme",
   "license": "MIT",
@@ -15,10 +15,7 @@
   },
   "files": [
     "dist",
-    "package.json",
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE"
+    "CHANGELOG.md"
   ],
   "type": "module",
   "sideEffects": false,
